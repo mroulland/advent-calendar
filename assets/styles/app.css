@@ -159,13 +159,18 @@ main .calendar p:last-of-type {
 main .calendar div.table {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+  align-items: baseline;
+  margin: auto;
 }
 main .calendar div.table a {
   display: inline-block;
   width: calc(20% - 1rem);
-  margin: auto;
+  line-height: 0;
+  margin: 0.2rem;
+}
+main .calendar div.table a img {
+  width: 100%;
 }
 main .calendar table {
   border-collapse: collapse;

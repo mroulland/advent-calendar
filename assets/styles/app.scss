@@ -182,13 +182,18 @@ main{
         div.table {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
-            align-items: center;
+            justify-content: center;
+            align-items: baseline;
+            margin:auto;
 
             a{
                 display: inline-block;
                 width:calc(20% - 1rem);
-                margin:auto;
+                line-height:0;
+                margin:.2rem;
+                img{
+                    width:100%;
+                }
             }
         }
 

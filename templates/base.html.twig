@@ -32,7 +32,7 @@
             </nav>
 
              <h1>Calendrier <span>( de l'avent )</span></h1>
-            <div class="count">J-40</div>
+            <div class="count">J-{{(date('now').diff(date('12/25/2024'))).days}}</div>
         </header>
         <main>
         {% block body %}{% endblock %}
