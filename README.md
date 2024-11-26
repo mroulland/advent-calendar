@@ -25,7 +25,7 @@ Il s'agit d'un calendrier de l'avent permettant aux participants de s'inscrire e
  1. Clonez le dépôt du projet :
 
 ```bash
-git clone https://github.com/mroulland/avent-calendar.git
+git clone https://github.com/mroulland/advent-calendar.git
 cd avent-calendar 
 ```
 2. Installez les dépendances avec Composer :
