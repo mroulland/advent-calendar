@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Calendar;
 use App\Entity\Ranking;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,12 +16,17 @@ class MainController extends AbstractController
     {
         // on récupère le ranking global après traitement
         $rankings = $manager->getRepository(Ranking::class)->findGlobalRanking();
-
+        $calendar = $manager->getRepository(Calendar::class)->findAll();
+        shuffle($calendar);
+        
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
+            'calendar' => $calendar,
             'rankings' => $rankings
         ]);
     }
+
+   
 
     
 }

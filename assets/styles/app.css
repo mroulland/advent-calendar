@@ -156,6 +156,17 @@ main .calendar p:last-of-type {
   color: #267045;
   font-weight: 700;
 }
+main .calendar div.table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+main .calendar div.table a {
+  display: inline-block;
+  width: calc(20% - 1rem);
+  margin: auto;
+}
 main .calendar table {
   border-collapse: collapse;
 }
@@ -237,7 +248,7 @@ main section.game div#quiz input {
   padding: 1rem;
   margin: 1rem 0 2rem;
 }
-main section.game div#quiz button.btn.submit {
+main section.game div#quiz + button.btn.submit {
   border: none;
   padding: 1rem;
   font-size: inherit;

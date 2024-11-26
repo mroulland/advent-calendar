@@ -179,6 +179,19 @@ main{
             font-weight: 700;
         }
 
+        div.table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+
+            a{
+                display: inline-block;
+                width:calc(20% - 1rem);
+                margin:auto;
+            }
+        }
+
         table{
             border-collapse: collapse;
         }
@@ -282,8 +295,8 @@ main{
                 padding:1rem;
                 margin: 1rem 0 2rem;
             }
-    
-            button.btn.submit{
+
+            & + button.btn.submit{
                 border:none;
                 padding:1rem;
                 font-size:inherit;
@@ -292,10 +305,9 @@ main{
                 cursor: pointer;
             }
         }
-
+        
         form[name="photo"]{
             display:flex;
-
 
             div#photo{    
                 width:70%;
@@ -311,7 +323,6 @@ main{
                         color:#fff;
                         cursor: pointer;
                     }
-    
                 }
             }
     
@@ -321,9 +332,7 @@ main{
                 border:none;
                 color:#fff;
             }
-    
-        }
-        
+        } 
     }
 
     section.galerie{

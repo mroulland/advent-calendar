@@ -22,46 +22,15 @@
 
         <p>Chaque jour, le calendrier de l'avent dévoile une nouvelle case contenant une activité, un petit jeu ou un défi à réaliser ! Chaque défi réalisé vous fera remporter des points. </p>
         <p>Alors qui sera le maître de l'avent 2024&nbsp;?</p>
-
-        <table>
-            <tr>
-                <td><a href="{{path('app_calendar_index', {id : 1})}}"><img src="{{ asset('imgs/calendar/calendar_1.jpg') }}" alt=""></a></td>
-                <td><a href="{{path('app_calendar_index', {id : 2})}}"><img src="{{ asset('imgs/calendar/calendar_2.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_3.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_4.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_5.jpg') }}" alt=""></a></td>
-            </tr>
-            <tr>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_6.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_7.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_8.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_9.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_10.jpg') }}" alt=""></a></td>
-            </tr>
-            <tr>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_11.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_12.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_13.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_14.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_15.jpg') }}" alt=""></a></td>
-            </tr>
-            <tr>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_16.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_17.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_18.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_19.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_20.jpg') }}" alt=""></a></td>
-            </tr>
-            <tr>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_21.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_22.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_23.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_24.jpg') }}" alt=""></a></td>
-                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_25.jpg') }}" alt=""></a></td>
-            </tr>
-        </table>
-
-        
+        <div class="table">
+            {% if calendar %}
+                {% for day in calendar %}
+                <a {% if day.date <= date('12/02/2024') %} href="{{path('app_calendar_index', {id : day.id})}}" {% endif %}>
+                    <img src="{{ asset('imgs/calendar/' ~ day.picture) }}" alt="calendrier du {{day.date|date('d/m')}}">
+                </a>
+                {% endfor %}
+            {% endif %}
+        </div>        
     </section>
 
     <section class="ranking">

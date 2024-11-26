@@ -20,6 +20,9 @@ class Calendar
     #[ORM\OneToOne(targetEntity: Challenge::class, inversedBy: 'calendar')]
     private ?Challenge $challenge = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
+
 
     public function getId(): ?int
     {
@@ -53,4 +56,15 @@ class Calendar
         return $this;
     }
 
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
 }

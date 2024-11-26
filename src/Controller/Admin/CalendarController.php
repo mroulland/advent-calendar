@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Calendar;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +43,7 @@ final class CalendarController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_calendar_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_admin_calendar_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Calendar $calendar): Response
     {
         return $this->render('admin/calendar/show.html.twig', [
@@ -50,7 +51,7 @@ final class CalendarController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_admin_calendar_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_admin_calendar_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, Calendar $calendar, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CalendarType::class, $calendar);

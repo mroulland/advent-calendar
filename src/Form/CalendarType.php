@@ -4,10 +4,11 @@ namespace App\Form;
 
 use App\Entity\Calendar;
 use App\Entity\Challenge;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CalendarType extends AbstractType
 {
@@ -20,6 +21,9 @@ class CalendarType extends AbstractType
             ->add('challenge', EntityType::class, [
                 'class' => Challenge::class,
                 'choice_label' => 'title',
+            ])
+            ->add('picture', TextType::class, [
+                'label' => 'Image (nom)'
             ])
         ;
     }
