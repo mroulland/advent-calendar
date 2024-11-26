@@ -1,3 +1,291 @@
-body {
-    background-color: skyblue;
+@import url("https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@font-face {
+  font-family: silverChristmas;
+  src: url("../fonts/silver_christmas.otf");
 }
+@font-face {
+  font-family: hiChristmas;
+  src: url("../fonts/hi_christmas.otf");
+}
+/* Reset */
+*,
+html,
+body {
+  margin: 0;
+  padding: 0rem;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+/* 1rem = 10px */
+html {
+  font-size: 62.5%;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* end reset */
+/* HEADER */
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  background-color: #fff9f2;
+  color: #302f2f;
+  font-size: 1.8rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+header nav {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background-color: #267045;
+  color: white;
+}
+header nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  list-style: none;
+}
+header nav ul a:hover {
+  color: #f1b846;
+}
+header h1 {
+  font-size: 11rem;
+  color: #da1300;
+  font-weight: 400;
+  font-family: hiChristmas;
+  text-align: center;
+  line-height: 0.7;
+}
+header h1 span {
+  font-size: 0.75em;
+  display: block;
+  color: #da1300;
+  font-family: hiChristmas;
+}
+header .count {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 1rem auto;
+  padding: 1rem;
+  background-color: #267045;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+main {
+  padding: 0 2rem;
+  text-align: justify;
+}
+main section {
+  margin: 4rem auto;
+}
+main h2 {
+  margin: 2rem auto;
+  text-align: center;
+  font-family: hiChristmas;
+  font-size: 9rem;
+  font-weight: 400;
+  color: #da1300;
+}
+main p {
+  margin: 2rem 0;
+}
+main p a {
+  font-weight: 700;
+  color: #267045;
+}
+main form .error {
+  color: #da1300;
+  font-weight: 500;
+  margin: 1rem;
+}
+main .login {
+  display: flex;
+  flex-direction: column;
+}
+main .login p {
+  margin: 0;
+  text-align: center;
+}
+main .login p:first-of-type {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+}
+main .login p:first-of-type::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
+  margin: auto;
+  width: 3rem;
+  border-bottom: solid 0.4rem #B0BEC5;
+}
+main .login p a {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  width: 50%;
+  background-color: #f1b846;
+  color: #fff;
+  cursor: pointer;
+}
+main .login p a:hover {
+  background-color: #d89a1e;
+}
+main .calendar p:last-of-type {
+  text-align: center;
+  font-size: 1.1em;
+  color: #267045;
+  font-weight: 700;
+}
+main .calendar table {
+  border-collapse: collapse;
+}
+main .ranking table {
+  width: 100%;
+  table-layout: auto;
+  text-align: center;
+}
+main .ranking table th {
+  background-color: #f1b846;
+  color: #fff;
+}
+main .ranking table tr:nth-child(odd) {
+  background-color: rgba(241, 184, 70, 0.6666666667);
+}
+main .register-form, main .login-form {
+  text-align: center;
+}
+main .register-form h2, main .login-form h2 {
+  color: #267045;
+}
+main .register-form label, main .login-form label {
+  color: #267045;
+}
+main .register-form input:not([type=checkbox]), main .login-form input:not([type=checkbox]) {
+  display: block;
+  width: 50%;
+  margin: 0.5rem auto 1rem;
+  padding: 0.5rem;
+  color: #5c5b5b;
+  text-align: center;
+  font-weight: inherit;
+}
+main .register-form small, main .login-form small {
+  color: #d89a1e;
+}
+main .register-form button[type=submit], main .login-form button[type=submit] {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  width: 50%;
+  background-color: #f1b846;
+  color: #fff;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+main .profile .infos {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  margin-bottom: 3rem;
+}
+main .profile .infos p:first-of-type {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #267045;
+}
+main .profile .infos img {
+  width: 30%;
+}
+main .profile .infos a {
+  display: block;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: #267045;
+  color: #fff;
+  cursor: pointer;
+}
+main section.game div#quiz label {
+  display: inline-block;
+  color: #267045;
+}
+main section.game div#quiz input {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0 2rem;
+}
+main section.game div#quiz button.btn.submit {
+  border: none;
+  padding: 1rem;
+  font-size: inherit;
+  color: white;
+  background-color: #267045;
+  cursor: pointer;
+}
+main section.game form[name=photo] {
+  display: flex;
+}
+main section.game form[name=photo] div#photo {
+  width: 70%;
+}
+main section.game form[name=photo] div#photo input[type=file] {
+  display: block;
+  width: 100%;
+  border: 0.1rem solid #267045;
+}
+main section.game form[name=photo] div#photo input[type=file]::file-selector-button {
+  padding: 1rem;
+  border: none;
+  background-color: #267045;
+  color: #fff;
+  cursor: pointer;
+}
+main section.game form[name=photo] button {
+  width: 30%;
+  background-color: #267045;
+  border: none;
+  color: #fff;
+}
+main section.galerie figure {
+  display: inline-block;
+  width: 49%;
+}
+main section.galerie figure img {
+  width: 100%;
+}
+main section.galerie figure figcaption {
+  text-align: center;
+  color: #da1300;
+  font-weight: 600;
+}
+
+footer {
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+  background-color: #267045;
+  color: white;
+}/*# sourceMappingURL=app.css.map */

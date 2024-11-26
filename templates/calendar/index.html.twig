@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier de l'avent - Jour {{calendar.date|date('d')}} {% endblock %}
+
+{% block body %}
+
+    <h2>{{ calendar.date|format_datetime('full', 'none', locale='fr') }}</h2>
+
+    <section class="rules">
+        <h3>Règles du jeu</h3>
+        <p>{{calendar.challenge.description}}</p>
+    </section>
+
+    {% if results is not empty %}
+        <h3>Résultats</h3>
+        <p>Félicitations, tu as marqué <span class="points">{{ results.points }} point{{results.points > 1 ? 's' : ''}}</span> ! </p>
+    {% else %} 
+
+        {% if type == 'quiz' %} 
+            {{ include('calendar/_quiz.html.twig')}} 
+        {% elseif type == 'photo' %}
+            {{ include('calendar/_photo.html.twig')}}
+        {% endif %}
+
+    {% endif %}
+
+    <section class="ranking">
+        <h3>Le classement actuel du défi</h3>
+        <table>
+            <tr>
+                <th>Place</th>
+                <th>Prénom</th>
+                <th>Points</th>
+                <th>Date</th>
+            </tr>
+
+            {% if rankings is not empty %}
+                {% for ranking in rankings %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{ranking.user.firstname}}</td>
+                <td>{{ranking.points}}</td>
+                <td>{{ranking.date|date('d/m H:i')}}</td>
+            </tr>
+                {% endfor %}
+
+            {% else %}
+            <tr><td colspan="4">Aucune participation pour le moment !</td></tr>
+            {% endif %}
+        
+        </table>
+    </section>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Admin - Modifier un jour{% endblock %}
+
+{% block body %}
+    <h1>Modifier un jour</h1>
+
+    {{ include('admin/calendar/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a class="btn back" href="{{ path('app_admin_calendar_index') }}">Retour à la liste</a>
+
+    {{ include('admin/calendar/_delete_form.html.twig') }}
+{% endblock %}

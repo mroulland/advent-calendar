@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier de l'avent - Profil{% endblock %}
+
+{% block body %}
+<section class="profile">
+    <h2>Page de profil</h2>
+    <div class="infos">
+        <img src="
+        {% if app.user.profilePicture %} {{asset('imgs/profile_pictures/' ~ app.user.profilePicture )}}
+        {% else %} {{asset('imgs/profile_pictures/default_profile.jpg')}}{% endif %}" alt="">
+
+        <div >
+            <p>{{app.user.firstname}}</p>
+            <p>Nombre de participations : {{ app.user.rankings|length }}</p>
+            <a href="{{path('app_logout')}}">Se déconnecter</a>
+        </div>
+    </div>
+
+    <div class="ranking">
+        <h3>Historique des participations</h3>
+        <table>
+            <tr>
+                <th>Calendrier</th>
+                <th>Challenge</th>
+                <th>Date de réalisation</th>
+                <th>Points gagnés</th>
+            </tr>
+            {% if app.user.rankings is not empty %}
+                {% for ranking in app.user.rankings %}
+                <tr>
+                    <td>{{ranking.challenge.calendar.date|date('d/m')}}</td>
+                    <td>{{ranking.challenge.title}}</td>
+                    <td>{{ranking.date|date('d/m H:i')}}</td>
+                    <td>{{ranking.points}}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucune participation</td>
+                </tr>
+            {% endif %}
+
+        </table>
+    </div>
+
+
+</section>
+
+    
+
+
+{% endblock %}

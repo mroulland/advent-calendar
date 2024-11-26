@@ -1,0 +1,11 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Admin - Nouveau défi{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau défi</h1>
+
+    {{ include('admin/challenge/_form.html.twig') }}
+
+    <a class='btn back' href="{{ path('app_admin_challenge_index') }}">Retour à la liste</a>
+{% endblock %}

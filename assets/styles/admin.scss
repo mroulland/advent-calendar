@@ -1,0 +1,77 @@
+.admin{
+
+    h1{
+        color:#267045;
+    }
+
+    table{
+        width:100%;
+        margin:2rem auto;
+        table-layout: auto;
+        text-align: center;
+
+        th{
+            background-color:#f1b846;
+            color:#fff;
+        }
+
+        th, td{
+            padding:.5rem;
+        }
+
+        tr:nth-child(odd){
+            background-color:#f1b846aa
+        }
+    }
+
+    .btn{
+        display:inline-block;
+        padding:.5rem;
+        cursor: pointer;
+        margin:1rem 0;
+        border:none;
+        font-family: inherit;
+        font-size:0.8em;
+    }
+
+    a.back, a.new{
+        background-color:#f1b846;
+        color:#fff;
+        &:hover{
+            background-color:#d89a1e;
+        }
+    }
+
+    form{
+        input, label, select, textarea{
+            display:block;
+            width:100%;
+            margin:1rem 0;
+        }
+
+        input, select, textarea{
+            padding:1rem;
+        }
+
+        textarea{
+            min-height:10rem;
+        }
+
+        .btn.submit{
+            background-color:#267045;
+            color:#fff;
+            &:hover{
+                background-color:#0a5429;
+            }
+        }
+
+        .btn.delete{
+            background-color:#da1300;
+            color:#fff;
+            &:hover{
+                background-color:#9d0e01;
+            }
+        }
+    }
+
+}

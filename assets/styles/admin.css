@@ -1,0 +1,60 @@
+.admin h1 {
+  color: #267045;
+}
+.admin table {
+  width: 100%;
+  margin: 2rem auto;
+  table-layout: auto;
+  text-align: center;
+}
+.admin table th {
+  background-color: #f1b846;
+  color: #fff;
+}
+.admin table th, .admin table td {
+  padding: 0.5rem;
+}
+.admin table tr:nth-child(odd) {
+  background-color: rgba(241, 184, 70, 0.6666666667);
+}
+.admin .btn {
+  display: inline-block;
+  padding: 0.5rem;
+  cursor: pointer;
+  margin: 1rem 0;
+  border: none;
+  font-family: inherit;
+  font-size: 0.8em;
+}
+.admin a.back, .admin a.new {
+  background-color: #f1b846;
+  color: #fff;
+}
+.admin a.back:hover, .admin a.new:hover {
+  background-color: #d89a1e;
+}
+.admin form input, .admin form label, .admin form select, .admin form textarea {
+  display: block;
+  width: 100%;
+  margin: 1rem 0;
+}
+.admin form input, .admin form select, .admin form textarea {
+  padding: 1rem;
+}
+.admin form textarea {
+  min-height: 10rem;
+}
+.admin form .btn.submit {
+  background-color: #267045;
+  color: #fff;
+}
+.admin form .btn.submit:hover {
+  background-color: #0a5429;
+}
+.admin form .btn.delete {
+  background-color: #da1300;
+  color: #fff;
+}
+.admin form .btn.delete:hover {
+  background-color: #9d0e01;
+}/*# sourceMappingURL=admin.css.map */

@@ -1,0 +1,33 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Calendar index{% endblock %}
+
+{% block body %}
+    <h1>Gestion du Calendrier</h1>
+
+    <table class="table">
+        <thead>
+                <th>Date</th>
+                <th>Challenge</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for calendar in calendars %}
+            <tr>
+                <td>{{ calendar.date ? calendar.date|date('Y-m-d') : '' }}</td>
+                <td>{{ calendar.challenge ? calendar.challenge.title : 'Pas de défi'}}</td>
+                <td>
+                    <a href="{{ path('app_admin_calendar_edit', {'id': calendar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun élément dans le calendrier.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn new" href="{{ path('app_admin_calendar_new') }}">Créer un nouveau</a>
+{% endblock %}

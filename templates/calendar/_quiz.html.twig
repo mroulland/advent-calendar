@@ -1,0 +1,11 @@
+{% if already_done %}
+    <p class="already_done">Tu as déjà participé à ce défi, rendez-vous au suivant !</p>
+    
+{% else %}
+    <section class="game">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn submit">Envoyer vos réponses</button>
+        {{ form_end(form) }}
+    </section>
+{% endif %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/admin.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>       
+            <nav>
+                <ul>
+                    <li><a href="{{path('app_main')}}"><img src="{{asset('imgs/house-tree.png')}}" width=30 alt="home"></a></li>
+                    <li><a href="{{path('app_admin_calendar_index')}}">Calendrier</a></li>
+                    <li><a href="{{path('app_admin_challenge_index')}}">Défis</a></li>
+                    <li><a href="">Ranking</a></li>
+                    {% if app.user %}
+                    <li>
+                        <a href="">Profil</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <main class="admin">
+        {% block body %}{% endblock %}
+        </main>
+        <footer>
+            <p>Morgane Bellettre - 2024</p>
+        </footer>
+    </body>
+</html>

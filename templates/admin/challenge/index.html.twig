@@ -1,0 +1,34 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Admin - Liste des défis{% endblock %}
+
+{% block body %}
+    <h1>Admin des défis</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for challenge in challenges %}
+            <tr>
+                <td>{{ challenge.id }}</td>
+                <td>{{ challenge.title }}</td>
+                <td>
+                    <a href="{{ path('app_admin_challenge_edit', {'id': challenge.id}) }}">éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun défi trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn new" href="{{ path('app_admin_challenge_new') }}">Créer un nouveau défi</a>
+{% endblock %}

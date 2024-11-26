@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier de l'avent{% endblock %}
+
+{% block body %}
+    <section>
+        <article>
+            <p>Cette année, Noël se fête en ligne à travers un calendrier de l'avent intéractif et un bingo de Noël !</p> 
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nobis eveniet necessitatibus saepe delectus rem laborum, id iste, sunt aut vero, ex minima quis quaerat repellendus sint? In, nemo officia.</p>
+        </article>
+
+        {% if not app.user %}
+        <article class="login">
+            <p>Pas encore inscrit ? <a href="{{path('app_register')}}">Inscrivez-vous</a></p>
+            <p>Déjà inscrit ? <a href="{{path('app_login')}}">Connectez-vous</a> et commencez à gagner des points !</p>
+        </article>
+        {% endif %}
+    </section>
+
+    <section class="calendar">
+        <h2>Le calendrier</h2>
+
+        <p>Chaque jour, le calendrier de l'avent dévoile une nouvelle case contenant une activité, un petit jeu ou un défi à réaliser ! Chaque défi réalisé vous fera remporter des points. </p>
+        <p>Alors qui sera le maître de l'avent 2024&nbsp;?</p>
+
+        <table>
+            <tr>
+                <td><a href="{{path('app_calendar_index', {id : 1})}}"><img src="{{ asset('imgs/calendar/calendar_1.jpg') }}" alt=""></a></td>
+                <td><a href="{{path('app_calendar_index', {id : 2})}}"><img src="{{ asset('imgs/calendar/calendar_2.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_3.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_4.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_5.jpg') }}" alt=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_6.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_7.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_8.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_9.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_10.jpg') }}" alt=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_11.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_12.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_13.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_14.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_15.jpg') }}" alt=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_16.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_17.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_18.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_19.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_20.jpg') }}" alt=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_21.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_22.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_23.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_24.jpg') }}" alt=""></a></td>
+                <td><a href=""><img src="{{ asset('imgs/calendar/calendar_25.jpg') }}" alt=""></a></td>
+            </tr>
+        </table>
+
+        
+    </section>
+
+    <section class="ranking">
+        <h2>Le classement</h2>
+        <table>
+            <tr>
+                <th>Place</th>
+                <th>Prénom</th>
+                <th>Points</th>
+            </tr>
+            {% if rankings is not empty %}
+                {% for ranking in rankings %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{ranking[0].user.firstname}}</td>
+                <td>{{ranking.totalPoints}}</td>
+            </tr>
+                {% endfor %}
+
+            {% else %}
+            <tr><td colspan="4">Aucune participation pour le moment !</td></tr>
+            {% endif %}
+        </table>
+    </section>
+
+    {# <section class="blog">
+        <h2>Le blog</h2>
+
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+        <article>
+            <img src="" alt="">
+            <p>Lorem ipsum dolor.</p>
+        </article>
+    </section> #}
+{% endblock %}
+

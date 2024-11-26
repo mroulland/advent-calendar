@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier de l'avent - inscription{% endblock %}
+
+{% block body %}
+    <section class="register-form">
+        {# <h2>Inscription</h2> #}
+        <p>Inscrivez-vous pour participer aux activités, défis et autre pour gagner des points !</p>
+
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+        
+        {{ form_widget(registrationForm) }}
+            <span><small>* : champs requis</small></span>
+            <button type="submit">Inscription</button>
+        {{ form_end(registrationForm) }}
+    </section>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Admin - créer un nouveau jour{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau jour</h1>
+
+    {{ include('admin/calendar/_form.html.twig') }}
+
+    <a class="btn back" href="{{ path('app_admin_calendar_index') }}">Retour à la liste</a>
+{% endblock %}
