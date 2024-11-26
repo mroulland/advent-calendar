@@ -1,4 +1,4 @@
-# Projet Biblios - Symfony 7
+# Projet Advent Calendar - Symfony 7
  
 Ce projet a été réalisé dans un cadre personnel et famillial. A usage ludique essentiellement.
 Il s'agit d'un calendrier de l'avent permettant aux participants de s'inscrire et participer à des petits défis mis en place chaque jour du mois de décembre. 
