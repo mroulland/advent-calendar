@@ -17,6 +17,7 @@ body {
   -webkit-box-sizing: border-box;
 }
 
+/* Variables */
 /* 1rem = 10px */
 html {
   font-size: 62.5%;
@@ -39,7 +40,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-  background-color: #fff9f2;
+  background-color: #fffcf5;
   color: #302f2f;
   font-size: 1.8rem;
   font-family: "Montserrat", sans-serif;
@@ -48,7 +49,8 @@ body {
 header nav {
   padding: 2rem;
   margin-bottom: 2rem;
-  background-color: #267045;
+  background-image: url(../../assets/imgs/bg/pexels-jeshoots-281618.jpg);
+  background-size: cover;
   color: white;
 }
 header nav ul {
@@ -63,7 +65,7 @@ header nav ul a:hover {
 }
 header h1 {
   font-size: 11rem;
-  color: #da1300;
+  color: #da1600;
   font-weight: 400;
   font-family: hiChristmas;
   text-align: center;
@@ -72,7 +74,7 @@ header h1 {
 header h1 span {
   font-size: 0.75em;
   display: block;
-  color: #da1300;
+  color: #da1600;
   font-family: hiChristmas;
 }
 header .count {
@@ -80,7 +82,7 @@ header .count {
   width: fit-content;
   margin: 1rem auto;
   padding: 1rem;
-  background-color: #267045;
+  background-color: #0b5d31;
   font-size: 3rem;
   font-weight: 700;
   color: #fff;
@@ -99,17 +101,17 @@ main h2 {
   font-family: hiChristmas;
   font-size: 9rem;
   font-weight: 400;
-  color: #da1300;
+  color: #da1600;
 }
 main p {
   margin: 2rem 0;
 }
 main p a {
   font-weight: 700;
-  color: #267045;
+  color: #0b5d31;
 }
 main form .error {
-  color: #da1300;
+  color: #da1600;
   font-weight: 500;
   margin: 1rem;
 }
@@ -136,7 +138,7 @@ main .login p:first-of-type::after {
   text-align: center;
   margin: auto;
   width: 3rem;
-  border-bottom: solid 0.4rem #B0BEC5;
+  border-bottom: solid 0.4rem #b0bec5;
 }
 main .login p a {
   display: block;
@@ -153,7 +155,7 @@ main .login p a:hover {
 main .calendar p:last-of-type {
   text-align: center;
   font-size: 1.1em;
-  color: #267045;
+  color: #0b5d31;
   font-weight: 700;
 }
 main .calendar div.table {
@@ -187,16 +189,20 @@ main .ranking table th {
 main .ranking table tr:nth-child(odd) {
   background-color: rgba(241, 184, 70, 0.6666666667);
 }
-main .register-form, main .login-form {
+main .register-form,
+main .login-form {
   text-align: center;
 }
-main .register-form h2, main .login-form h2 {
-  color: #267045;
+main .register-form h2,
+main .login-form h2 {
+  color: #0b5d31;
 }
-main .register-form label, main .login-form label {
-  color: #267045;
+main .register-form label,
+main .login-form label {
+  color: #0b5d31;
 }
-main .register-form input:not([type=checkbox]), main .login-form input:not([type=checkbox]) {
+main .register-form input:not([type=checkbox]),
+main .login-form input:not([type=checkbox]) {
   display: block;
   width: 50%;
   margin: 0.5rem auto 1rem;
@@ -205,10 +211,12 @@ main .register-form input:not([type=checkbox]), main .login-form input:not([type
   text-align: center;
   font-weight: inherit;
 }
-main .register-form small, main .login-form small {
+main .register-form small,
+main .login-form small {
   color: #d89a1e;
 }
-main .register-form button[type=submit], main .login-form button[type=submit] {
+main .register-form button[type=submit],
+main .login-form button[type=submit] {
   display: block;
   margin: 1rem auto;
   padding: 0.5rem;
@@ -229,7 +237,7 @@ main .profile .infos {
 main .profile .infos p:first-of-type {
   font-size: 1.2em;
   font-weight: 600;
-  color: #267045;
+  color: #0b5d31;
 }
 main .profile .infos img {
   width: 30%;
@@ -239,13 +247,13 @@ main .profile .infos a {
   margin: 1rem 0;
   padding: 0.5rem;
   text-align: center;
-  background-color: #267045;
+  background-color: #0b5d31;
   color: #fff;
   cursor: pointer;
 }
 main section.game div#quiz label {
   display: inline-block;
-  color: #267045;
+  color: #0b5d31;
 }
 main section.game div#quiz input {
   display: block;
@@ -258,7 +266,7 @@ main section.game div#quiz + button.btn.submit {
   padding: 1rem;
   font-size: inherit;
   color: white;
-  background-color: #267045;
+  background-color: #0b5d31;
   cursor: pointer;
 }
 main section.game form[name=photo] {
@@ -270,18 +278,18 @@ main section.game form[name=photo] div#photo {
 main section.game form[name=photo] div#photo input[type=file] {
   display: block;
   width: 100%;
-  border: 0.1rem solid #267045;
+  border: 0.1rem solid #0b5d31;
 }
 main section.game form[name=photo] div#photo input[type=file]::file-selector-button {
   padding: 1rem;
   border: none;
-  background-color: #267045;
+  background-color: #0b5d31;
   color: #fff;
   cursor: pointer;
 }
 main section.game form[name=photo] button {
   width: 30%;
-  background-color: #267045;
+  background-color: #0b5d31;
   border: none;
   color: #fff;
 }
@@ -294,7 +302,7 @@ main section.galerie figure img {
 }
 main section.galerie figure figcaption {
   text-align: center;
-  color: #da1300;
+  color: #da1600;
   font-weight: 600;
 }
 
@@ -302,6 +310,6 @@ footer {
   padding: 2rem;
   margin-top: 2rem;
   text-align: center;
-  background-color: #267045;
+  background-color: #0b5d31;
   color: white;
 }/*# sourceMappingURL=app.css.map */
