@@ -33,35 +33,10 @@
     {% endif %}
 
     {% if type == 'photo' %}
-        {{ include('calendar/_galerie.html.twig')}}
+        {{ include('includes/_galerie.html.twig')}}
     {% endif %}
-    
-    <section class="ranking">
-        <h3>Le classement actuel du défi</h3>
-        <table>
-            <tr>
-                <th>Place</th>
-                <th>Prénom</th>
-                <th>Points</th>
-                <th>Date</th>
-            </tr>
 
-            {% if rankings is not empty %}
-                {% for ranking in rankings %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td>{{ranking.user.firstname}}</td>
-                <td>{{ranking.points}}</td>
-                <td>{{ranking.date|date('d/m H:i')}}</td>
-            </tr>
-                {% endfor %}
-
-            {% else %}
-            <tr><td colspan="4">Aucune participation pour le moment !</td></tr>
-            {% endif %}
-        
-        </table>
-    </section>
+    {{ include('includes/_ranking.html.twig')}}
     
 </div>
 {% endblock %}
