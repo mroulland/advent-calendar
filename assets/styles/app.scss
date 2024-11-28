@@ -339,39 +339,39 @@ main {
     }
   }
 
-    section.game{
-        div#quiz{
-            margin-bottom:2rem;
+  section.game{
+    div#quiz{
+        margin-bottom:2rem;
 
-            label{
-                display:inline-block;
-                color:$colorGreen;;
-                margin: 2rem 0 1rem;
-                font-weight:500;
-    
-            }
+      label{
+        display:inline-block;
+        color: $colorGreen;
+        margin: 2rem 0 1rem;
+        font-weight:500;
 
-            input.text-type{
-                display: block;
-                width:100%;
-                padding:1rem;
-                margin: 1rem 0 2rem;
-                
-            }
-            .choice-type{
-                & > label{
-                    margin:0 0 1rem 0;
-                    display: inline-block;
-                    width:calc(100% - 4rem);
-                    color:#302f2f;
-                    font-weight: 400;
-                } 
-                  
-                input{
-                    display: inline-block;
-                    width:4rem;
-                }
-            }
+      }
+
+      input.text-type{
+        display: block;
+        width:100%;
+        padding:1rem;
+        margin: 1rem 0 2rem;
+        
+    }
+    .choice-type{
+        & > label{
+            margin:0 0 1rem 0;
+            display: inline-block;
+            width:calc(100% - 4rem);
+            color:#302f2f;
+            font-weight: 400;
+        } 
+          
+        input{
+            display: inline-block;
+            width:4rem;
+        }
+    }
 
       & + button.btn.submit {
         border: none;
@@ -412,22 +412,22 @@ main {
     }
   }
 
-    section.galerie{
-        figure{
-            display: inline-block;
-            width:49%;
+  section.galerie{
+    figure{
+      display: inline-block;
+      width:49%;
 
-            img{
-                width:100%;
-            }
+      img{
+        width:100%;
+      }
 
-            figcaption{
-                text-align: center;
-                color:#da1300;
-                font-weight: 600;
-            }
-        }
+      figcaption{
+        text-align: center;
+        color: $colorRed;
+        font-weight: 600;
+      }
     }
+  }
 }
 
 footer {
