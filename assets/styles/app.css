@@ -291,15 +291,31 @@ main .profile .infos a {
   color: #fff;
   cursor: pointer;
 }
+main section.game div#quiz {
+  margin-bottom: 2rem;
+}
 main section.game div#quiz label {
   display: inline-block;
   color: #0b5d31;
+  margin: 2rem 0 1rem;
+  font-weight: 500;
 }
-main section.game div#quiz input {
+main section.game div#quiz input.text-type {
   display: block;
   width: 100%;
   padding: 1rem;
   margin: 1rem 0 2rem;
+}
+main section.game div#quiz .choice-type > label {
+  margin: 0 0 1rem 0;
+  display: inline-block;
+  width: calc(100% - 4rem);
+  color: #302f2f;
+  font-weight: 400;
+}
+main section.game div#quiz .choice-type input {
+  display: inline-block;
+  width: 4rem;
 }
 main section.game div#quiz + button.btn.submit {
   border: none;
