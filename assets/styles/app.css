@@ -243,15 +243,34 @@ main .profile .infos a {
   color: #fff;
   cursor: pointer;
 }
+main section.game div#quiz {
+  margin-bottom: 2rem;
+}
+main section.game div#quiz .test .form-check {
+  display: block;
+  margin-bottom: 10px;
+}
 main section.game div#quiz label {
   display: inline-block;
   color: #267045;
+  margin: 2rem 0 1rem;
+  font-weight: 500;
 }
-main section.game div#quiz input {
+main section.game div#quiz input.text-type {
   display: block;
   width: 100%;
   padding: 1rem;
-  margin: 1rem 0 2rem;
+}
+main section.game div#quiz .choice-type > label {
+  margin: 0 0 1rem 0;
+  display: inline-block;
+  width: calc(100% - 4rem);
+  color: #302f2f;
+  font-weight: 400;
+}
+main section.game div#quiz .choice-type input {
+  display: inline-block;
+  width: 4rem;
 }
 main section.game div#quiz + button.btn.submit {
   border: none;
@@ -285,17 +304,39 @@ main section.game form[name=photo] button {
   border: none;
   color: #fff;
 }
-main section.galerie figure {
-  display: inline-block;
-  width: 49%;
+main section.galerie .elements {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 2rem auto;
 }
-main section.galerie figure img {
+main section.galerie .elements figure {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main section.galerie .elements figure a {
+  line-height: 0;
+}
+main section.galerie .elements figure img {
   width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0.8rem 0.8rem 0 0;
 }
-main section.galerie figure figcaption {
+main section.galerie .elements figure figcaption {
+  font-size: 0.9em;
   text-align: center;
-  color: #da1300;
+  background-color: #f1b846;
+  padding: 1rem;
+  color: #fff;
   font-weight: 600;
+  width: 100%;
+  border-radius: 0 0 0.8rem 0.8rem;
 }
 
 footer {

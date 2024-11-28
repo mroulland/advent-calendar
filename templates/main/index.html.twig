@@ -10,10 +10,7 @@
         </article>
 
         {% if not app.user %}
-        <article class="login">
-            <p>Pas encore inscrit ? <a href="{{path('app_register')}}">Inscrivez-vous</a></p>
-            <p>Déjà inscrit ? <a href="{{path('app_login')}}">Connectez-vous</a> et commencez à gagner des points !</p>
-        </article>
+            {{ include('_login.html.twig')}} 
         {% endif %}
     </section>
 
@@ -25,7 +22,7 @@
         <div class="table">
             {% if calendar %}
                 {% for day in calendar %}
-                <a {% if day.date <= date('12/02/2024') %} href="{{path('app_calendar_index', {id : day.id})}}" {% endif %}>
+                <a {% if day.date <= date('12/03/2024') %} href="{{path('app_calendar_index', {id : day.id})}}" {% endif %}>
                     <img src="{{ asset('imgs/calendar/' ~ day.picture) }}" alt="calendrier du {{day.date|date('d/m')}}">
                 </a>
                 {% endfor %}

@@ -3,26 +3,11 @@
     
 {% else %}
 <section class="game">
-    {{ form_start(form) }}
+    {{ form_start(form, { 'attr': { 'data-turbo': 'false' }}) }}
     {{ form_widget(form) }}
-    <button class="btn submit">Envoyer votre photo</button>
+    {% if app.user %}
+        <button class="btn submit">Envoyer votre photo</button>
+    {% endif %}
     {{ form_end(form) }}
 </section>
 {% endif %}
-
-<section class="galerie">
-<h3>Gallerie des participations</h3>
-    {% if rankings is not empty %}
-        {% for ranking in rankings %}
-            {% if ranking.details is not empty %}
-                <figure>
-                    <a href="{{asset('imgs/' ~ calendar.challenge.uploadDirectory ~ ranking.details[0])}}" target="_blank">
-                        <img src="{{asset('imgs/' ~ calendar.challenge.uploadDirectory ~ ranking.details[0])}}" alt="participation de {{ranking.user.firstname}}" width=100>
-                    </a>
-                    <figcaption>{{ranking.user.firstname}}</figcaption>
-                </figure>
-               
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-</section>
