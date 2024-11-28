@@ -7,6 +7,8 @@
 /public/bundles/
 /var/
 /vendor/
+/assets/imgs/defi_*/
+
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
