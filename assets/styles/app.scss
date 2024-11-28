@@ -23,12 +23,7 @@ body {
 $colorWhite: #fff;
 $colorGreen: #0b5d31;
 $colorRed: #da1600;
-$colorBeige: #fffcf5;
-$colorLightBrown: #f5c998;
-$colorBrown: #e4914d;
 $colorLightBlue: #a5d0d9;
-$colorBlue: #0c7473;
-$colorDarkBlue: #006167;
 
 /* 1rem = 10px */
 html {
@@ -58,100 +53,94 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-header {
-  nav {
-    padding: 2rem;
-    margin-bottom: 2rem;
-    // background-color: $colorGreen;
-    background-image: url(../../assets/imgs/bg/pexels-jeshoots-281618.jpg);
-    background-size: cover;
-    color: #ffff;
-
-    ul {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-around;
-      list-style: none;
-
-      a:hover {
-        color: #f1b846;
-      }
+header nav {
+  padding: 2rem;
+  margin-bottom: 3rem;
+  color: #ffff;
+  background-color: $colorGreen;
+  ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    a:hover {
+      color: #f1b846;
     }
   }
+}
 
-  h1 {
-    font-size: 11rem;
+h1 {
+  font-size: 11rem;
+  color: $colorRed;
+  font-weight: 400;
+  font-family: hiChristmas;
+  text-align: center;
+  line-height: 0.7;
+
+  span {
+    font-size: 0.75em;
+    display: block;
     color: $colorRed;
-    font-weight: 400;
     font-family: hiChristmas;
-    text-align: center;
-    line-height: 0.7;
+  }
+}
 
-    span {
-      font-size: 0.75em;
-      display: block;
-      color: $colorRed;
-      font-family: hiChristmas;
-    }
+.ball {
+  width: fit-content;
+  margin: 1rem auto;
+  padding: 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+  width: 20rem;
+  height: 20rem;
+  // background: radial-gradient(
+  //   circle at 30% 30%,
+  //   rgba(255, 255, 255, 0.8),
+  //   rgba(255, 255, 255, 0.1) 40%,
+  //   rgba(255, 255, 255, 0) 70%
+  // );
+  background: radial-gradient(circle, #d0e9f5, #dbefff);
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 50%;
+    height: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0) 60%
+    );
+    border-radius: 50%;
+    filter: blur(2px);
   }
 
-  .ball {
-    width: fit-content;
-    margin: 1rem auto;
-    padding: 1rem;
-    font-size: 3rem;
-    font-weight: 700;
-    width: 20rem;
-    height: 20rem;
-    // background: radial-gradient(
-    //   circle at 30% 30%,
-    //   rgba(255, 255, 255, 0.8),
-    //   rgba(255, 255, 255, 0.1) 40%,
-    //   rgba(255, 255, 255, 0) 70%
-    // );
-    background: radial-gradient(circle, #d0e9f5, #dbefff);
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+    width: 30%;
+    height: 30%;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5),
-      0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
+  }
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 20%;
-      left: 20%;
-      width: 50%;
-      height: 50%;
-      background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.6),
-        rgba(255, 255, 255, 0) 60%
-      );
-      border-radius: 50%;
-      filter: blur(2px);
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 10%;
-      right: 10%;
-      width: 30%;
-      height: 30%;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-    }
-
-    .count {
-      width: 100%;
-      height: 100%;
-      color: $colorGreen;
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      justify-content: center;
-    }
+  .count {
+    width: 100%;
+    height: 100%;
+    color: $colorGreen;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -174,6 +163,7 @@ main {
 
   p {
     margin: 2rem 0;
+    text-align: center;
     a {
       font-weight: 700;
       color: $colorGreen;
@@ -261,6 +251,10 @@ main {
   }
 
   .ranking {
+    h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
     table {
       width: 100%;
       table-layout: auto;
@@ -421,4 +415,62 @@ footer {
   text-align: center;
   background-color: $colorGreen;
   color: #ffff;
+}
+
+/*   RESPONSIVE   */
+
+@media (min-width: 480px) {
+  main {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media (min-width: 720px) {
+  main {
+    width: 80%;
+    margin: auto;
+  }
+  header {
+    position: relative;
+    background-image: url(../../assets/imgs/bg/pexels-barry-plott-48592-753410.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    nav {
+      background-color: $colorGreen;
+    }
+    h1,
+    h1 span {
+      color: $colorWhite;
+      font-size: 12rem;
+      text-shadow: 5px 2px 9px black;
+    }
+  }
+}
+
+@media (min-width: 1080px) {
+  main {
+    width: 70%;
+    margin: auto;
+    .calendar {
+      width: 70%;
+      margin: auto;
+    }
+    .ranking table {
+      width: 65%;
+      margin: auto;
+    }
+  }
+
+  header nav {
+    padding: 2rem;
+    ul {
+      justify-content: center;
+
+      li {
+        margin: auto 6rem;
+      }
+    }
+  }
 }
