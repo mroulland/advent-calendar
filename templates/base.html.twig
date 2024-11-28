@@ -31,8 +31,10 @@
                 </ul>
             </nav>
 
-             <h1>Calendrier <span>( de l'avent )</span></h1>
-            <div class="count">J-{{(date('now').diff(date('12/25/2024'))).days}}</div>
+            <h1>Calendrier <span>( de l'avent )</span></h1>
+            <div class="ball">
+                <div class="count">J-{{(date('now').diff(date('12/25/2024'))).days}}</div>
+            </div>
         </header>
         <main>
         {% block body %}{% endblock %}
