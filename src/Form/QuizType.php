@@ -30,7 +30,8 @@ class QuizType extends AbstractType
                         'placeholder' => null
                     ]
                 );
-            }else{
+            }
+            else{
                 $builder
                     ->add($key, TextType::class, [
                         'attr' => [
@@ -40,9 +41,7 @@ class QuizType extends AbstractType
                     ]
                 );
             }
-            
         }
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

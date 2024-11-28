@@ -16,11 +16,12 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/calendar')]
 class CalendarController extends AbstractController
 {
-
+    #[IsGranted("ROLE_USER")]
     #[Route('/{id}', name: 'app_calendar_index', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function index(?Calendar $calendar, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
@@ -67,7 +68,8 @@ class CalendarController extends AbstractController
                 $ranking->setDetails($submittedAnswers);
 
                 // Validation des réponses : 
-                $points = $this->validateAnswers($submittedAnswers, $questions); 
+                $points = $this->validateAnswers($submittedAnswers, $questions);
+
             }
             elseif($challenge instanceof PhotoChallenge)
             {

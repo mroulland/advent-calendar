@@ -22,7 +22,7 @@
         <div class="table">
             {% if calendar %}
                 {% for day in calendar %}
-                <a {% if day.date <= date('12/03/2024') %} href="{{path('app_calendar_index', {id : day.id})}}" {% endif %}>
+                <a {% if day.date <= date('12/24/2024') %} href="{{path('app_calendar_index', {id : day.id})}}" {% endif %}>
                     <img src="{{ asset('imgs/calendar/' ~ day.picture) }}" alt="calendrier du {{day.date|date('d/m')}}">
                 </a>
                 {% endfor %}
