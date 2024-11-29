@@ -52,8 +52,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
   background: $colorWhite;
   color: #302f2f;
   font-size: 1.8rem;
@@ -99,8 +97,8 @@ h1 {
   padding: 1rem;
   font-size: 3rem;
   font-weight: 700;
-  width: 20rem;
-  height: 20rem;
+  width: 15rem;
+  height: 15rem;
   // background: radial-gradient(
   //   circle at 30% 30%,
   //   rgba(255, 255, 255, 0.8),
@@ -152,7 +150,7 @@ h1 {
 }
 
 main {
-  padding: 0 2rem;
+  padding: 0 1rem;
   text-align: justify;
 
   section {
@@ -248,7 +246,7 @@ main {
 
       a {
         display: inline-block;
-        width: calc(20% - 1rem);
+        width: calc(20% - .5rem);
         line-height: 0;
         margin: 0.2rem;
         img {
@@ -266,17 +264,12 @@ main {
     table {
       width: 100%;
       table-layout: auto;
-      //text-align: center;
+      font-size:1.6rem;
 
       th {
-        padding: 1rem 2rem;
+        padding: .5rem 1rem;
         background-color: #f1b846;
         color: #fff;
-
-        &:first-of-type,
-        &:last-of-type:not(.date) {
-          width: 5rem;
-        }
       }
 
       tr:nth-child(odd) {
@@ -323,44 +316,37 @@ main {
           display: inline-block;
           width: 4rem;
         }
-      }
-
-      & + button.btn.submit {
-        border: none;
-        padding: 1rem;
-        font-size: inherit;
-        color: #ffff;
-        background-color: $colorGreen;
-        cursor: pointer;
-      }
+      }      
     }
 
     form[name="photo"] {
-      display: flex;
 
-      div#photo {
-        width: 70%;
-        input[type="file"] {
-          display: block;
-          width: 100%;
-          border: 0.1rem solid $colorGreen;
-
-          &::file-selector-button {
-            padding: 1rem;
-            border: none;
-            background-color: $colorGreen;
-            color: #fff;
-            cursor: pointer;
-          }
-        }
+      label {
+        display: inline-block;
+        color: $colorGreen;
+        margin: 2rem 0 1rem;
+        font-weight: 500;
       }
-
-      button {
-        width: 30%;
-        background-color: $colorGreen;
-        border: none;
-        color: #fff;
+      input[type="file"] {
+        display: block;
+        width: 100%;
+        margin: 2rem auto;
+        font-size: inherit; 
       }
+    }
+
+    button.btn.submit {
+      border: none;
+      padding: 1rem;
+      font-size: 1.6rem;
+      color: #ffff;
+      background-color: $colorGreen;
+      cursor: pointer;
+    }
+
+    .already-done{
+      color:#0b5d31;
+      font-weight: 500;
     }
   }
 
@@ -504,16 +490,29 @@ footer {
   }
 
   main {
+    padding: 0 2rem;
     width: 90%;
     margin: auto;
     .ranking {
-      table td img {
-        display: inline;
-        width: 5rem;
-        margin-right: 2rem;
-        vertical-align: middle;
-        border-radius: 50%;
-      }
+      table{
+        font-size:1.8rem;
+        th {
+          padding: 1rem 2rem;
+
+          &:first-of-type,
+          &:last-of-type:not(.date) {
+            width: 5rem;
+          }
+        }
+        
+        td img {
+          display: inline;
+          width: 5rem;
+          margin-right: 2rem;
+          vertical-align: middle;
+          border-radius: 50%;
+        }
+      } 
     }
   }
 }
@@ -533,6 +532,11 @@ footer {
           margin: auto 6rem;
         }
       }
+    }
+
+    .ball{
+      width: 20rem;
+      height: 20rem;
     }
   }
 
