@@ -5,9 +5,10 @@ namespace App\Form\Admin;
 use App\Entity\Challenge;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
-use App\Form\JsonArrayTransformer;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Form\DataTransformer\JsonArrayTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
