@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,6 +11,13 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class QuizType extends AbstractType
 {
+    private $assetPackages;
+
+    public function __construct(Packages $assetPackages)
+    {
+        $this->assetPackages = $assetPackages;
+    }
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         // Utilise l'option "questions" pour configurer les champs dynamiques
@@ -30,6 +38,25 @@ class QuizType extends AbstractType
                         'placeholder' => null
                     ]
                 );
+            }
+            elseif(!empty($question["audio"])){
+                $audioUrl = $this->assetPackages->getUrl('audio/'.$question["audio"]);
+
+                $builder
+                    ->add($key, TextType::class, [
+                        
+                        'attr' => [
+                            'class' => 'audio-type text-type'
+                        ],
+                        'label' => $question["question"].'<audio controls>
+                                        <source src="'.$audioUrl.'" type="audio/mpeg">
+                                        Votre navigateur ne supporte pas l\'élément audio.
+                                    </audio>',
+                        'label_attr' => [
+                            'class' => 'audio-type-label'
+                        ],
+                        'label_html' => true
+                ]);
             }
             else{
                 $builder

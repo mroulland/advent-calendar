@@ -143,6 +143,7 @@ main h3 {
 main p {
   margin: 2rem 0;
   text-align: center;
+  line-height: 2.8rem;
 }
 main p a {
   font-weight: 700;
@@ -239,6 +240,7 @@ main section.game div#quiz {
 }
 main section.game div#quiz label {
   display: inline-block;
+  text-align: left;
   color: #0b5d31;
   margin: 2rem 0 1rem;
   font-weight: 500;
@@ -259,6 +261,10 @@ main section.game div#quiz .choice-type > label {
 main section.game div#quiz .choice-type input {
   display: inline-block;
   width: 4rem;
+}
+main section.game div#quiz .audio-type-label audio {
+  display: block;
+  margin-top: 1rem;
 }
 main section.game form[name=photo] label {
   display: inline-block;
@@ -391,6 +397,11 @@ footer {
 }
 
 /*   RESPONSIVE   */
+@media screen and (min-width: 500px) {
+  main div#quiz .audio-type-label audio {
+    margin-top: 1rem;
+  }
+}
 @media screen and (min-width: 768px) {
   header {
     position: relative;
