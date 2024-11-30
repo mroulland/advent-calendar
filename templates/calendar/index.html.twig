@@ -8,7 +8,7 @@
 
     <section class="rules">
         <h3>Règles du jeu</h3>
-        <p>{{calendar.challenge.description}}</p>
+        <p>{{calendar.challenge.description|raw}}</p>
 
         {% if not app.user %}
             {{ include('includes/_login.html.twig')}} 

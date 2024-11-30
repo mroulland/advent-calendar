@@ -7,6 +7,7 @@ use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
 
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\Form\DataTransformer\JsonArrayTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,9 +32,14 @@ class ChallengeType extends AbstractType
         ->add('title', TextType::class, [
             'label' => 'Titre'
         ])
-        ->add('description', TextType::class, [
+        ->add('description', TextareaType::class, [
             'required' => false,
-            'label' => 'Description'
+            'label' => 'Description',
+            'attr' => [
+                'class' => 'ckeditor',
+                'minlength' => '10',
+                'rows' => 10
+            ],
         ]);
 
         

@@ -88,7 +88,7 @@ final class ChallengeController extends AbstractController
 
         return $this->render('admin/challenge/edit.html.twig', [
             'challenge' => $challenge,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -102,4 +102,5 @@ final class ChallengeController extends AbstractController
 
         return $this->redirectToRoute('app_admin_challenge_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
