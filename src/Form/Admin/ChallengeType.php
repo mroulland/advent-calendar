@@ -5,9 +5,7 @@ namespace App\Form\Admin;
 use App\Entity\Challenge;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
-
 use Symfony\Component\Form\AbstractType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\Form\DataTransformer\JsonArrayTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;

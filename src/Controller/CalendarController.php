@@ -81,8 +81,7 @@ class CalendarController extends AbstractController
                     $directory = $challenge->getUploadDirectory();
                     try {
                         $pictureFile->move(
-                            $this->getParameter('kernel.project_dir') . '/assets/imgs/'.$directory, $pictureFilename);
-                        
+                            $this->getParameter('kernel.project_dir') . '/public/uploads/challenges/'.$directory, $pictureFilename);
                         $ranking->setDetails([$pictureFilename]);
                         $points = 5;
                             
@@ -91,6 +90,9 @@ class CalendarController extends AbstractController
                     }
                 }
             }
+
+            if(!$manager->getRepository(Ranking::class)->findByChallenge($challenge)) $points += 2;
+            
             $ranking->setPoints($points);
             $manager->persist($ranking);
             $manager->flush();

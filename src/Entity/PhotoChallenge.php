@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 class PhotoChallenge extends Challenge
 {
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string',  nullable: true, length: 255)]
     private ?string $uploadDirectory = null;
 
     
