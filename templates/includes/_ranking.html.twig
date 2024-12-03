@@ -15,13 +15,13 @@
             {% if home is defined %}
         <tr>
             <td>{{loop.index}}</td>
-            <td><img {% if ranking[0].user.profilePicture %} src="{{ asset('/imgs/profile_pictures/' ~ ranking[0].user.profilePicture) }}" {% else %}  src="{{ asset('/imgs/profile_pictures/default_profile.jpg') }}" {% endif %} alt="photo profil" width=50>{{ranking[0].user.firstname}}</td>
+            <td><img {% if ranking[0].user.profilePicture %} src="{{ asset('uploads/profile_pictures/' ~ ranking[0].user.profilePicture) }}" {% else %}  src="{{ asset('uploads/profile_pictures/default_profile.jpg') }}" {% endif %} alt="photo profil" width=50>{{ranking[0].user.firstname}}</td>
             <td>{{ranking.totalPoints}}</td>
         </tr>
             {% else %}
         <tr>
             <td>{{loop.index}}</td>
-            <td><img {% if ranking.user.profilePicture %} src="{{ asset('/imgs/profile_pictures/' ~ ranking.user.profilePicture) }}" {% else %}  src="{{ asset('/imgs/profile_pictures/default_profile.jpg') }}" {% endif %} alt="photo profil" width=50>{{ranking.user.firstname}}</td>
+            <td><img {% if ranking.user.profilePicture %} src="{{ asset('uploads/profile_pictures/' ~ ranking.user.profilePicture) }}" {% else %}  src="{{ asset('uploads/profile_pictures/default_profile.jpg') }}" {% endif %} alt="photo profil" width=50>{{ranking.user.firstname}}</td>
             <td>{{ranking.points}}</td>
             <td>{{ranking.date|date('d/m H:i')}}</td>
         </tr>

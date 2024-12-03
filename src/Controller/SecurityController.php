@@ -57,7 +57,7 @@ class SecurityController extends AbstractController
     
                 try {
                     $profilePictureFile->move(
-                        $this->getParameter('kernel.project_dir') . '/assets/imgs/profile_pictures',
+                        $this->getParameter('kernel.project_dir') . '/public/uploads/profile_pictures',
                         $newFilename
                     );
                 } catch (FileException $e) {

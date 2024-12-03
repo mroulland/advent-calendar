@@ -6,9 +6,8 @@
 <section class="profile">
     <h2>Page de profil</h2>
     <div class="infos">
-        <img src="
-        {% if app.user.profilePicture %} {{asset('imgs/profile_pictures/' ~ app.user.profilePicture )}}
-        {% else %} {{asset('imgs/profile_pictures/default_profile.jpg')}}{% endif %}" alt="">
+        <img src="{% if app.user.profilePicture %}{{asset('uploads/profile_pictures/' ~ app.user.profilePicture )}}
+        {% else %} {{asset('uploads/profile_pictures/default_profile.jpg')}}{% endif %}" alt="">
 
         <div >
             <p>{{app.user.firstname}}</p>

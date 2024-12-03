@@ -535,6 +535,8 @@ footer {
         td img {
           display: inline;
           width: 5rem;
+          height:5rem;
+          object-fit: cover;
           margin-right: 2rem;
           vertical-align: middle;
           border-radius: 50%;
