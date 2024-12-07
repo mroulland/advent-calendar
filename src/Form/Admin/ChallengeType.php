@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Admin;
 
 use App\Entity\Challenge;
-use App\Form\JsonArrayTransformer;
+use App\Entity\QuizChallenge;
+use App\Entity\PhotoChallenge;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Form\DataTransformer\JsonArrayTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 class ChallengeType extends AbstractType
 {
@@ -32,25 +34,26 @@ class ChallengeType extends AbstractType
         ->add('description', TextType::class, [
             'required' => false,
             'label' => 'Description'
-        ])
-        ->add('questions', TextareaType::class, [
-            'required' => false,
-            'mapped' => false, // uniquement pour les quiz
-            'label' => 'Questions'
-        ])
-        ->add('answers', TextareaType::class, [
-            'required' => false,
-            'mapped' => false, // uniquement pour les quiz
-            'label' => 'Réponses'
-        ])
-        ->add('uploadDirectory', TextType::class, [
-            'required' => false,
-            'mapped' => false, // uniquement pour les photos
-            'label' => 'Dossier où stocker les photos'
         ]);
 
-        $builder->get('questions')->addModelTransformer(new JsonArrayTransformer());
-        $builder->get('answers')->addModelTransformer(new JsonArrayTransformer());
+        
+        // Ajout conditionnel du sous-formulaire
+        if ($options['data'] instanceof QuizChallenge) {
+            $builder->add('questions', TextareaType::class, [
+                'required' => false,
+                'label' => 'Questions'
+            ]);
+
+            $builder->get('questions')->addModelTransformer(new JsonArrayTransformer());
+        }
+
+        if ($options['data'] instanceof PhotoChallenge) {
+            $builder->add('uploadDirectory', TextType::class, [
+                'required' => false,
+                'label' => 'Dossier où stocker les photos'
+            ]);
+        }
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

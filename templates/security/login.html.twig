@@ -9,11 +9,6 @@
 
     <form method="post">
         
-        {% if app.user %}
-            <div>
-                Vous êtes connectés en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
-            </div>
-        {% endif %}
         <div>
             <label for="username">Email</label>
             <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus>
@@ -39,6 +34,8 @@
         <button type="submit">
             Se connecter
         </button>
+
+        <p>Vous n'avez pas encore de compte ? <br><a href="{{path('app_register')}}">Inscrivez-vous tout de suite !</a></p>
     </form>
 </section>
 {% endblock %}

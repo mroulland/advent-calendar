@@ -1,0 +1,37 @@
+<section class="ranking">
+    <h2>Le classement</h2>
+    <table>
+        <tr>
+            <th>Place</th>
+            <th>Prénom</th>
+            <th>Points</th>
+            {% if home is not defined %}
+            <th class="date">Date</th>
+            {% endif %}
+        </tr>
+        {% if rankings is not empty %}
+            {% for ranking in rankings %}
+
+            {% if home is defined %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td><img {% if ranking[0].user.profilePicture %} src="{{ asset('/imgs/profile_pictures/' ~ ranking[0].user.profilePicture) }}" {% else %}  src="{{ asset('/imgs/profile_pictures/default_profile.jpg') }}" {% endif %} alt="photo profil" width=50>{{ranking[0].user.firstname}}</td>
+            <td>{{ranking.totalPoints}}</td>
+        </tr>
+            {% else %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td><img {% if ranking.user.profilePicture %} src="{{ asset('/imgs/profile_pictures/' ~ ranking.user.profilePicture) }}" {% else %}  src="{{ asset('/imgs/profile_pictures/default_profile.jpg') }}" {% endif %} alt="photo profil" width=50>{{ranking.user.firstname}}</td>
+            <td>{{ranking.points}}</td>
+            <td>{{ranking.date|date('d/m H:i')}}</td>
+        </tr>
+
+            {% endif %}
+        
+            {% endfor %}
+
+        {% else %}
+        <tr><td colspan="4">Aucune participation pour le moment !</td></tr>
+        {% endif %}
+    </table>
+</section>

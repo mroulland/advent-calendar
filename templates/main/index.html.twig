@@ -10,10 +10,7 @@
         </article>
 
         {% if not app.user %}
-        <article class="login">
-            <p>Pas encore inscrit ? <a href="{{path('app_register')}}">Inscrivez-vous</a></p>
-            <p>Déjà inscrit ? <a href="{{path('app_login')}}">Connectez-vous</a> et commencez à gagner des points !</p>
-        </article>
+            {{ include('includes/_login.html.twig')}} 
         {% endif %}
     </section>
 
@@ -25,7 +22,7 @@
         <div class="table">
             {% if calendar %}
                 {% for day in calendar %}
-                <a {% if day.date <= date('12/02/2024') %} href="{{path('app_calendar_index', {id : day.id})}}" {% endif %}>
+                <a {% if day.date <= date('12/24/2024') %} href="{{path('app_calendar_index', {id : day.id})}}" {% endif %}>
                     <img src="{{ asset('imgs/calendar/' ~ day.picture) }}" alt="calendrier du {{day.date|date('d/m')}}">
                 </a>
                 {% endfor %}
@@ -33,28 +30,7 @@
         </div>        
     </section>
 
-    <section class="ranking">
-        <h2>Le classement</h2>
-        <table>
-            <tr>
-                <th>Place</th>
-                <th>Prénom</th>
-                <th>Points</th>
-            </tr>
-            {% if rankings is not empty %}
-                {% for ranking in rankings %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td>{{ranking[0].user.firstname}}</td>
-                <td>{{ranking.totalPoints}}</td>
-            </tr>
-                {% endfor %}
-
-            {% else %}
-            <tr><td colspan="4">Aucune participation pour le moment !</td></tr>
-            {% endif %}
-        </table>
-    </section>
+    {% include 'includes/_ranking.html.twig' with {'home' : true} %}
 
     {# <section class="blog">
         <h2>Le blog</h2>

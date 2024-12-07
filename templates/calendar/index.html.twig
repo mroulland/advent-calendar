@@ -9,11 +9,19 @@
     <section class="rules">
         <h3>Règles du jeu</h3>
         <p>{{calendar.challenge.description}}</p>
+
+        {% if not app.user %}
+            {{ include('includes/_login.html.twig')}} 
+        {% endif %}
     </section>
 
-    {% if results is not empty %}
+    {% if points is not empty %}
+    
         <h3>Résultats</h3>
-        <p>Félicitations, tu as marqué <span class="points">{{ results.points }} point{{results.points > 1 ? 's' : ''}}</span> ! </p>
+        <p>Félicitations, tu as marqué <span class="points">{{ points }} point{{points > 1 ? 's' : ''}}</span> ! </p>
+
+        
+
     {% else %} 
 
         {% if type == 'quiz' %} 
@@ -24,32 +32,11 @@
 
     {% endif %}
 
-    <section class="ranking">
-        <h3>Le classement actuel du défi</h3>
-        <table>
-            <tr>
-                <th>Place</th>
-                <th>Prénom</th>
-                <th>Points</th>
-                <th>Date</th>
-            </tr>
+    {% if type == 'photo' %}
+        {{ include('includes/_galerie.html.twig')}}
+    {% endif %}
 
-            {% if rankings is not empty %}
-                {% for ranking in rankings %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td>{{ranking.user.firstname}}</td>
-                <td>{{ranking.points}}</td>
-                <td>{{ranking.date|date('d/m H:i')}}</td>
-            </tr>
-                {% endfor %}
-
-            {% else %}
-            <tr><td colspan="4">Aucune participation pour le moment !</td></tr>
-            {% endif %}
-        
-        </table>
-    </section>
+    {{ include('includes/_ranking.html.twig')}}
     
 </div>
 {% endblock %}

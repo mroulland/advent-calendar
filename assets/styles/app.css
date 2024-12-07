@@ -7,6 +7,7 @@
   font-family: hiChristmas;
   src: url("../fonts/hi_christmas.otf");
 }
+/* Variables */
 /* Reset */
 *,
 html,
@@ -17,7 +18,6 @@ body {
   -webkit-box-sizing: border-box;
 }
 
-/* Variables */
 /* 1rem = 10px */
 html {
   font-size: 62.5%;
@@ -191,6 +191,10 @@ main h2 {
   font-weight: 400;
   color: #da1600;
 }
+main h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
 main p {
   margin: 2rem 0;
   text-align: center;
@@ -267,94 +271,52 @@ main .calendar div.table a img {
 main .calendar table {
   border-collapse: collapse;
 }
-main .ranking h3 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
 main .ranking table {
   width: 100%;
   table-layout: auto;
-  text-align: center;
 }
 main .ranking table th {
+  padding: 1rem 2rem;
   background-color: #f1b846;
   color: #fff;
+}
+main .ranking table th:first-of-type, main .ranking table th:last-of-type:not(.date) {
+  width: 5rem;
 }
 main .ranking table tr:nth-child(odd) {
   background-color: rgba(241, 184, 70, 0.6666666667);
 }
-main .register-form,
-main .login-form {
-  text-align: center;
+main .ranking table td {
+  padding: 1rem 2rem;
 }
-main .register-form h2,
-main .login-form h2 {
-  color: #0b5d31;
+main .ranking table td img {
+  display: none;
 }
-main .register-form label,
-main .login-form label {
-  color: #0b5d31;
-}
-main .register-form input:not([type=checkbox]),
-main .login-form input:not([type=checkbox]) {
-  display: block;
-  width: 50%;
-  margin: 0.5rem auto 1rem;
-  padding: 0.5rem;
-  color: #5c5b5b;
-  text-align: center;
-  font-weight: inherit;
-}
-main .register-form small,
-main .login-form small {
-  color: #d89a1e;
-}
-main .register-form button[type=submit],
-main .login-form button[type=submit] {
-  display: block;
-  margin: 1rem auto;
-  padding: 0.5rem;
-  width: 50%;
-  background-color: #f1b846;
-  color: #fff;
-  border: none;
-  font-size: inherit;
-  font-family: inherit;
-  cursor: pointer;
-}
-main .profile .infos {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 3rem;
-}
-main .profile .infos p:first-of-type {
-  font-size: 1.2em;
-  font-weight: 600;
-  color: #0b5d31;
-}
-main .profile .infos img {
-  width: 30%;
-}
-main .profile .infos a {
-  display: block;
-  margin: 1rem 0;
-  padding: 0.5rem;
-  text-align: center;
-  background-color: #0b5d31;
-  color: #fff;
-  cursor: pointer;
+main section.game div#quiz {
+  margin-bottom: 2rem;
 }
 main section.game div#quiz label {
   display: inline-block;
   color: #0b5d31;
+  margin: 2rem 0 1rem;
+  font-weight: 500;
 }
-main section.game div#quiz input {
+main section.game div#quiz input.text-type {
   display: block;
   width: 100%;
   padding: 1rem;
   margin: 1rem 0 2rem;
+}
+main section.game div#quiz .choice-type > label {
+  margin: 0 0 1rem 0;
+  display: inline-block;
+  width: calc(100% - 4rem);
+  color: #302f2f;
+  font-weight: 400;
+}
+main section.game div#quiz .choice-type input {
+  display: inline-block;
+  width: 4rem;
 }
 main section.game div#quiz + button.btn.submit {
   border: none;
@@ -388,17 +350,102 @@ main section.game form[name=photo] button {
   border: none;
   color: #fff;
 }
-main section.galerie figure {
-  display: inline-block;
-  width: 49%;
+main section.galerie .elements {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 10px;
+  margin: 2rem auto;
 }
-main section.galerie figure img {
+main section.galerie .elements figure {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main section.galerie .elements figure a {
+  line-height: 0;
+}
+main section.galerie .elements figure img {
   width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0.8rem 0.8rem 0 0;
 }
-main section.galerie figure figcaption {
+main section.galerie .elements figure figcaption {
+  font-size: 0.9em;
   text-align: center;
-  color: #da1600;
+  background-color: #f1b846;
+  padding: 1rem;
+  color: #fff;
   font-weight: 600;
+  width: 100%;
+  border-radius: 0 0 0.8rem 0.8rem;
+}
+main .register-form,
+main .login-form {
+  text-align: center;
+}
+main .register-form h2,
+main .login-form h2 {
+  color: #0b5d31;
+}
+main .register-form label,
+main .login-form label {
+  color: #0b5d31;
+}
+main .register-form input:not([type=checkbox]),
+main .login-form input:not([type=checkbox]) {
+  display: block;
+  width: 80%;
+  margin: 0.5rem auto 1rem;
+  padding: 1rem;
+  font-size: inherit;
+  color: #5c5b5b;
+  text-align: center;
+  font-weight: inherit;
+}
+main .register-form small,
+main .login-form small {
+  color: #d89a1e;
+}
+main .register-form button[type=submit],
+main .login-form button[type=submit] {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  width: 80%;
+  background-color: #f1b846;
+  color: #fff;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+main .profile .infos {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  margin-bottom: 3rem;
+}
+main .profile .infos p:first-of-type {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #0b5d31;
+}
+main .profile .infos img {
+  width: 30%;
+}
+main .profile .infos a {
+  display: block;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: #0b5d31;
+  color: #fff;
+  cursor: pointer;
 }
 
 footer {
@@ -410,17 +457,7 @@ footer {
 }
 
 /*   RESPONSIVE   */
-@media (min-width: 480px) {
-  main {
-    width: 90%;
-    margin: auto;
-  }
-}
-@media (min-width: 720px) {
-  main {
-    width: 80%;
-    margin: auto;
-  }
+@media screen and (min-width: 768px) {
   header {
     position: relative;
     background-image: url(../../assets/imgs/bg/pexels-barry-plott-48592-753410.jpg);
@@ -436,19 +473,21 @@ footer {
     font-size: 12rem;
     text-shadow: 5px 2px 9px black;
   }
-}
-@media (min-width: 1080px) {
   main {
-    width: 70%;
+    width: 90%;
     margin: auto;
   }
-  main .calendar {
-    width: 70%;
-    margin: auto;
+  main .ranking table td img {
+    display: inline;
+    width: 5rem;
+    margin-right: 2rem;
+    vertical-align: middle;
+    border-radius: 50%;
   }
-  main .ranking table {
-    width: 65%;
-    margin: auto;
+}
+@media screen and (min-width: 1024px) {
+  header h1 {
+    font-size: 15rem;
   }
   header nav {
     padding: 2rem;
@@ -458,5 +497,30 @@ footer {
   }
   header nav ul li {
     margin: auto 6rem;
+  }
+  body {
+    font-size: 2rem;
+  }
+  body main {
+    width: 80%;
+  }
+  body main h2 {
+    font-size: 11rem;
+  }
+  body main .calendar {
+    width: 80%;
+    margin: auto;
+  }
+  body main .register-form input:not([type=checkbox]), body main .login-form input:not([type=checkbox]) {
+    max-width: 45rem;
+    font-size: inherit;
+  }
+  body main .register-form button[type=submit], body main .login-form button[type=submit] {
+    max-width: 45rem;
+  }
+}
+@media screen and (min-width: 1440px) {
+  main {
+    max-width: 120rem;
   }
 }/*# sourceMappingURL=app.css.map */

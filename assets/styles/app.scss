@@ -9,6 +9,19 @@
   src: url("../fonts/hi_christmas.otf");
 }
 
+/* Variables */
+$colorWhite: #fff;
+$colorGreen: #0b5d31;
+$colorRed: #da1600;
+$colorLightBlue: #a5d0d9;
+
+$phone-down: 500px;
+$tablet-up: 768px;
+$tablet-down: 900px;
+$desktop-up: 1024px;
+$desktop-down: 1280px;
+$widescreen-up: 1440px;
+
 /* Reset */
 *,
 html,
@@ -18,12 +31,6 @@ body {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-
-/* Variables */
-$colorWhite: #fff;
-$colorGreen: #0b5d31;
-$colorRed: #da1600;
-$colorLightBlue: #a5d0d9;
 
 /* 1rem = 10px */
 html {
@@ -236,6 +243,11 @@ main {
     color: $colorRed;
   }
 
+  h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
   p {
     margin: 2rem 0;
     text-align: center;
@@ -327,32 +339,28 @@ main {
   }
 
   .ranking {
-    h3 {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
     table {
       width: 100%;
       table-layout: auto;
-      text-align: center;
+      //text-align: center;
 
       th {
+        padding: 1rem 2rem;
         background-color: #f1b846;
         color: #fff;
+
+        &:first-of-type,
+        &:last-of-type:not(.date) {
+          width: 5rem;
+        }
       }
 
       tr:nth-child(odd) {
         background-color: #f1b846aa;
       }
-    }
-  }
 
-  .register-form,
-  .login-form {
-    text-align: center;
-    h2 {
-      color: $colorGreen;
-    }
+      td {
+        padding: 1rem 2rem;
 
     label {
       color: $colorGreen;
@@ -412,21 +420,43 @@ main {
         background-color: $colorGreen;
         color: #fff;
         cursor: pointer;
+        img {
+          display: none;
+        }
       }
     }
   }
 
   section.game {
     div#quiz {
+      margin-bottom: 2rem;
+
       label {
         display: inline-block;
         color: $colorGreen;
+        margin: 2rem 0 1rem;
+        font-weight: 500;
       }
-      input {
+
+      input.text-type {
         display: block;
         width: 100%;
         padding: 1rem;
         margin: 1rem 0 2rem;
+      }
+      .choice-type {
+        & > label {
+          margin: 0 0 1rem 0;
+          display: inline-block;
+          width: calc(100% - 4rem);
+          color: #302f2f;
+          font-weight: 400;
+        }
+
+        input {
+          display: inline-block;
+          width: 4rem;
+        }
       }
 
       & + button.btn.submit {
@@ -469,18 +499,109 @@ main {
   }
 
   section.galerie {
-    figure {
-      display: inline-block;
-      width: 49%;
+    .elements {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+      gap: 10px;
+      margin: 2rem auto;
 
-      img {
-        width: 100%;
+      figure {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        a {
+          line-height: 0;
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+          border-radius: 0.8rem 0.8rem 0 0;
+        }
+
+        figcaption {
+          font-size: 0.9em;
+          text-align: center;
+          background-color: #f1b846;
+          padding: 1rem;
+          color: #fff;
+          font-weight: 600;
+          width: 100%;
+          border-radius: 0 0 0.8rem 0.8rem;
+        }
+      }
+    }
+  }
+  .register-form,
+  .login-form {
+    text-align: center;
+    h2 {
+      color: $colorGreen;
+    }
+
+    label {
+      color: $colorGreen;
+    }
+
+    input:not([type="checkbox"]) {
+      display: block;
+      width: 80%;
+      margin: 0.5rem auto 1rem;
+      padding: 1rem;
+      font-size: inherit;
+      color: #5c5b5b;
+      text-align: center;
+      font-weight: inherit;
+    }
+
+    small {
+      color: #d89a1e;
+    }
+
+    button[type="submit"] {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.5rem;
+      width: 80%;
+      background-color: #f1b846;
+      color: #fff;
+      border: none;
+      font-size: inherit;
+      font-family: inherit;
+      cursor: pointer;
+    }
+  }
+
+  .profile {
+    .infos {
+      display: flex;
+      justify-content: space-around;
+      align-items: stretch;
+      margin-bottom: 3rem;
+
+      p:first-of-type {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: $colorGreen;
       }
 
-      figcaption {
+      img {
+        width: 30%;
+      }
+
+      a {
+        display: block;
+        margin: 1rem 0;
+        padding: 0.5rem;
         text-align: center;
-        color: $colorRed;
-        font-weight: 600;
+        background-color: $colorGreen;
+        color: #fff;
+        cursor: pointer;
       }
     }
   }
@@ -496,18 +617,8 @@ footer {
 
 /*   RESPONSIVE   */
 
-@media (min-width: 480px) {
-  main {
-    width: 90%;
-    margin: auto;
-  }
-}
-
-@media (min-width: 720px) {
-  main {
-    width: 80%;
-    margin: auto;
-  }
+@media screen and (min-width: $tablet-up) {
+  // 700px
   header {
     position: relative;
     background-image: url(../../assets/imgs/bg/pexels-barry-plott-48592-753410.jpg);
@@ -517,6 +628,7 @@ footer {
     nav {
       background-color: $colorGreen;
     }
+
     h1,
     h1 span {
       color: $colorWhite;
@@ -524,30 +636,72 @@ footer {
       text-shadow: 5px 2px 9px black;
     }
   }
+
+  main {
+    width: 90%;
+    margin: auto;
+    .ranking {
+      table td img {
+        display: inline;
+        width: 5rem;
+        margin-right: 2rem;
+        vertical-align: middle;
+        border-radius: 50%;
+      }
+    }
+  }
 }
 
-@media (min-width: 1080px) {
-  main {
-    width: 70%;
-    margin: auto;
-    .calendar {
-      width: 70%;
-      margin: auto;
+@media screen and (min-width: $desktop-up) {
+  // 1024 px
+  header {
+    h1 {
+      font-size: 15rem;
     }
-    .ranking table {
-      width: 65%;
-      margin: auto;
+    nav {
+      padding: 2rem;
+      ul {
+        justify-content: center;
+
+        li {
+          margin: auto 6rem;
+        }
+      }
     }
   }
 
-  header nav {
-    padding: 2rem;
-    ul {
-      justify-content: center;
+  body {
+    font-size: 2rem;
 
-      li {
-        margin: auto 6rem;
+    main {
+      width: 80%;
+
+      h2 {
+        font-size: 11rem;
+      }
+
+      .calendar {
+        width: 80%;
+        margin: auto;
+      }
+
+      .register-form,
+      .login-form {
+        input:not([type="checkbox"]) {
+          max-width: 45rem;
+          font-size: inherit;
+        }
+
+        button[type="submit"] {
+          max-width: 45rem;
+        }
       }
     }
+  }
+}
+
+@media screen and (min-width: $widescreen-up) {
+  main {
+    max-width: 120rem;
   }
 }

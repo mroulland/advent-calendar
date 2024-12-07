@@ -6,6 +6,7 @@ use App\Entity\Challenge;
 use App\Form\ChallengeType;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
+use App\Form\Admin\ChallengeType as AdminChallengeType;
 use App\Repository\ChallengeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +29,7 @@ final class ChallengeController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $challenge = new Challenge();
-        $form = $this->createForm(ChallengeType::class, $challenge);
+        $form = $this->createForm(AdminChallengeType::class, $challenge);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,12 +37,8 @@ final class ChallengeController extends AbstractController
             $challenge = null;
             if ($type === 'quiz') {
                 $challenge = new QuizChallenge();
-                $challenge->setQuestions($form->get('questions')->getData());
-                $challenge->setAnswers($form->get('answers')->getData());
-
             } elseif ($type === 'photo') {
                 $challenge = new PhotoChallenge();
-                $challenge->setUploadDirectory($form->get('uploadDirectory')->getData());
             }
 
             if ($challenge) {
@@ -57,7 +54,7 @@ final class ChallengeController extends AbstractController
                 $this->addFlash('success', 'Le défi a été créé avec succès !');
             }
 
-            return $this->redirectToRoute('app_admin_challenge_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_challenge_edit', ['id' => $challenge->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/challenge/new.html.twig', [
@@ -69,10 +66,21 @@ final class ChallengeController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_challenge_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Challenge $challenge, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(ChallengeType::class, $challenge);
+        $form = $this->createForm(AdminChallengeType::class, $challenge);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($challenge instanceof QuizChallenge) {
+                $questions = $form->get('questions')->getData();
+                $challenge->setQuestions($questions);
+            }
+    
+            if ($challenge instanceof PhotoChallenge) {
+                $uploadDirectory = $form->get('uploadDirectory')->getData();
+                $challenge->setUploadDirectory($uploadDirectory);
+            }
+
             $entityManager->flush();
             $this->addFlash('success', 'Le défi a bien été mis à jour !');
             //return $this->redirectToRoute('app_admin_challenge_index', [], Response::HTTP_SEE_OTHER);

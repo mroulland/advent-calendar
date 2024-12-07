@@ -25,8 +25,4 @@ class MainController extends AbstractController
             'rankings' => $rankings
         ]);
     }
-
-   
-
-    
 }

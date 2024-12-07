@@ -3,9 +3,13 @@
     
 {% else %}
     <section class="game">
-        {{ form_start(form) }}
+        {{ form_start(form,{ 'attr': { 'data-turbo': 'false' }}) }}
         {{ form_widget(form) }}
-        <button class="btn submit">Envoyer vos réponses</button>
+        
+        {% if app.user %}
+            <button type="submit" class="btn submit">Envoyer vos réponses</button>
+        {% endif %}
+        
         {{ form_end(form) }}
     </section>
 {% endif %}
