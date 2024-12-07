@@ -1,0 +1,10 @@
+{
+  "overrides": [
+    {
+      "files": "*.twig",
+      "options": {
+        "parser": "melody"
+      }
+    }
+  ]
+}
