@@ -18,7 +18,7 @@
                 <td>{{ calendar.date ? calendar.date|date('Y-m-d') : '' }}</td>
                 <td>{{ calendar.challenge ? calendar.challenge.title : 'Pas de défi'}}</td>
                 <td>
-                    <a href="{{ path('app_admin_calendar_edit', {'id': calendar.id}) }}">edit</a>
+                    <a class="flipCase" href="{{ path('app_admin_calendar_edit', {'id': calendar.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
