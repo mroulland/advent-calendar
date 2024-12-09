@@ -12,8 +12,7 @@
         {% endblock %}
     </head>
     <body>
-        <header>
-        <div class="overlay"></div>      
+        <header>      
             <nav>
                 <ul>
                     <li><a href="{{path('app_main')}}"><img src="{{asset('imgs/icons/house-tree.png')}}" width=30 alt="home"></a></li>
@@ -32,13 +31,19 @@
             </nav>
 
             <h1>Calendrier <span>( de l'avent )</span></h1>
-            <div class="ball">
-                <div class="count">J-{{(date('now').diff(date('12/25/2024'))).days}}</div>
+            <div class="ball bubble">
+                <div class="snowflakes">
+                    {% for i in 1..random(70, 100) %}
+                        <div class="snowflake"></div>
+                    {% endfor %}
+                </div>
+                <div class="count">J-{{ (date('now').diff(date('12/25/2024'))).days }}</div>
             </div>
         </header>
         <main>
         {% block body %}{% endblock %}
-        </main>
+        </main>      
+        <script src="{{ asset('snowfall.js') }}"></script>
         
     </body>
 </html>
