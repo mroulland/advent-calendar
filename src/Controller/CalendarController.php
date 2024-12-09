@@ -26,7 +26,8 @@ class CalendarController extends AbstractController
     public function index(?Calendar $calendar, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
 
-        if(!isset($calendar) || !$calendar->getChallenge()){
+        if( !isset($calendar) || !$calendar->getChallenge() || 
+            ($calendar->getDate() > new DateTime('now') && $this->denyAccessUnlessGranted('ROLE_ADMIN'))){
             return $this->redirectToRoute('app_main');
         }
 
