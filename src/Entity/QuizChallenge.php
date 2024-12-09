@@ -13,11 +13,6 @@ class QuizChallenge extends Challenge
     #[Assert\Type(type: 'array', message: 'La valeur doit être un tableau.')]
     private array $questions = [];
 
-    #[ORM\Column(type: 'json', nullable: true)]
-    #[Assert\Type(type: 'array', message: 'La valeur doit être un tableau.')]
-    private array $answers = [];
-
-
     public function getQuestions(): array
     {
         return $this->questions;
@@ -26,17 +21,6 @@ class QuizChallenge extends Challenge
     public function setQuestions(array $questions): static
     {
         $this->questions = $questions;
-        return $this;
-    }
-
-    public function getAnswers(): array
-    {
-        return $this->answers;
-    }
-
-    public function setAnswers(array $answers): static
-    {
-        $this->answers = $answers;
         return $this;
     }
 }

@@ -13,9 +13,8 @@ class PhotoType extends AbstractType
     {
         $builder   
         ->add('pictureFile', FileType::class, [
-            'required' => false,
             'mapped' => false, // uniquement pour les photos
-            'label' => false
+            'label' => 'Choisissez une photo de votre choix pour illustrer votre participation à ce défi !'
         ]);
     
     }

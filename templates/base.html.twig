@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Calendrier de l'avent{% endblock %}</title>
-        
+        <link rel="icon" href="{{asset('imgs/icons/pere-noel.png')}}" />
         {% block stylesheets %}{% endblock %}
 
         {% block javascripts %}
@@ -12,12 +12,11 @@
         {% endblock %}
     </head>
     <body>
-        <header>       
+        <header>      
             <nav>
                 <ul>
                     <li><a href="{{path('app_main')}}"><img src="{{asset('imgs/icons/house-tree.png')}}" width=30 alt="home"></a></li>
-                    <li><a href="">Classement</a></li>
-                    <li><a href="">Blog</a></li>
+
                     {% if app.user %}
                     <li>
                         <a href="{{path('app_profile')}}">Profil</a>
@@ -31,14 +30,20 @@
                 </ul>
             </nav>
 
-             <h1>Calendrier <span>( de l'avent )</span></h1>
-            <div class="count">J-{{(date('now').diff(date('12/25/2024'))).days}}</div>
+            <h1>Calendrier <span>( de l'avent )</span></h1>
+            <div class="ball bubble">
+                <div class="snowflakes">
+                    {% for i in 1..random(70, 100) %}
+                        <div class="snowflake"></div>
+                    {% endfor %}
+                </div>
+                <div class="count">J-{{ (date('now').diff(date('12/25/2024'))).days }}</div>
+            </div>
         </header>
         <main>
         {% block body %}{% endblock %}
-        </main>
-        <footer>
-            <p>Morgane Bellettre - 2024</p>
-        </footer>
+        </main>      
+        <script src="{{ asset('snowfall.js') }}"></script>
+        
     </body>
 </html>

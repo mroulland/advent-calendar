@@ -1,0 +1,19 @@
+<section class="galerie">
+<h3>Galerie des participations</h3>
+
+    <div class="elements">
+    {% if rankings is not empty %}
+        {% for ranking in rankings %}
+            {% if ranking.details is not empty %}
+                <figure>
+                    <a href="{{asset('uploads/challenges/' ~ calendar.challenge.uploadDirectory ~ ranking.details[0])}}" target="_blank">
+                        <img src="{{asset('uploads/challenges/' ~ calendar.challenge.uploadDirectory ~ ranking.details[0])}}" alt="participation de {{ranking.user.firstname}}" width=100>
+                    </a>
+                    <figcaption>{{ranking.user.firstname}}</figcaption>
+                </figure>  
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    </div>
+
+</section>

@@ -42,7 +42,7 @@
   padding: 1rem;
 }
 .admin form textarea {
-  min-height: 10rem;
+  min-height: 40rem;
 }
 .admin form .btn.submit {
   background-color: #267045;

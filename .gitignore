@@ -1,12 +1,15 @@
+# env
+/.env
+/.env.*
 
 ###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
+/public/uploads/
 /var/
 /vendor/
+/node_modules/
+
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
@@ -22,4 +25,10 @@
 ###> symfony/asset-mapper ###
 /public/assets/
 /assets/vendor/
+/assets/imgs/challenges
+/assets/imgs/profile_pictures
 ###< symfony/asset-mapper ###
+
+# divers
+/.prettierrc
+

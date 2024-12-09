@@ -1,11 +1,15 @@
 {% if already_done %}
-    <p class="already_done">Tu as déjà participé à ce défi, rendez-vous au suivant !</p>
+    <p class="already-done">Tu as déjà participé à ce défi, rendez-vous au suivant !</p>
     
 {% else %}
-    <section class="game">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn submit">Envoyer vos réponses</button>
-        {{ form_end(form) }}
-    </section>
+
+    {{ form_start(form,{ 'attr': { 'data-turbo': 'false' }}) }}
+    {{ form_widget(form) }}
+    
+    {% if app.user %}
+        <button type="submit" class="btn submit">Envoyer vos réponses</button>
+    {% endif %}
+    
+    {{ form_end(form) }}
+
 {% endif %}

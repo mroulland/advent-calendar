@@ -16,15 +16,18 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/calendar')]
 class CalendarController extends AbstractController
 {
-
+    #[IsGranted("ROLE_USER")]
     #[Route('/{id}', name: 'app_calendar_index', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function index(?Calendar $calendar, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
-        if(!isset($calendar) || !$calendar->getChallenge()){
+
+        if( !isset($calendar) || !$calendar->getChallenge() || 
+            ($calendar->getDate() > new DateTime('now') && $this->denyAccessUnlessGranted('ROLE_ADMIN'))){
             return $this->redirectToRoute('app_main');
         }
 
@@ -32,12 +35,13 @@ class CalendarController extends AbstractController
         $challenge = $calendar->getChallenge();
         
         $already_done = $manager->getRepository(Ranking::class)->isUserAlreadyDone($user, $challenge) ? true : false;
-        $results = [];
+        $points = "";
 
         if($challenge instanceof QuizChallenge)
         {
             $type = "quiz";
             $questions = $challenge->getQuestions();
+
             $form = $this->createForm(QuizType::class, null, ['questions' => $questions]);
         }
         elseif($challenge instanceof PhotoChallenge)
@@ -61,13 +65,12 @@ class CalendarController extends AbstractController
 
             if($challenge instanceof QuizChallenge)
             {
-                $correctAnswers = $challenge->getAnswers();
                 $submittedAnswers = $form->getData();
                 $ranking->setDetails($submittedAnswers);
 
                 // Validation des réponses : 
-                $results = $this->validateAnswers($submittedAnswers, $correctAnswers);
-                $points = $results["points"];
+                $points = $this->validateAnswers($submittedAnswers, $questions);
+
             }
             elseif($challenge instanceof PhotoChallenge)
             {
@@ -79,8 +82,7 @@ class CalendarController extends AbstractController
                     $directory = $challenge->getUploadDirectory();
                     try {
                         $pictureFile->move(
-                            $this->getParameter('kernel.project_dir') . '/assets/imgs/'.$directory, $pictureFilename);
-                        
+                            $this->getParameter('kernel.project_dir') . '/public/uploads/challenges/'.$directory, $pictureFilename);
                         $ranking->setDetails([$pictureFilename]);
                         $points = 5;
                             
@@ -89,6 +91,9 @@ class CalendarController extends AbstractController
                     }
                 }
             }
+
+            if(!$manager->getRepository(Ranking::class)->findByChallenge($challenge)) $points += 2;
+            
             $ranking->setPoints($points);
             $manager->persist($ranking);
             $manager->flush();
@@ -100,46 +105,29 @@ class CalendarController extends AbstractController
         return $this->render('calendar/index.html.twig', [
             'controller_name' => 'CalendarController',
             'calendar' => $calendar,
-            'already_done' => $already_done,
-            'type' => $type,
-            'form' => $form,
-            'rankings' => $rankings,
-            'results' => $results
+             'already_done' => $already_done,
+             'type' => $type,
+             'form' => $form,
+             'rankings' => $rankings,
+             'points' => $points
         ]);
     }
 
-    private function validateAnswers($submittedAnswers, $correctAnswers)
+    private function validateAnswers($submittedAnswers, $questions)
     {
-        $results = [];
         $points = 0;
+
         foreach($submittedAnswers as $key => $value)
         {
-            if(is_array($correctAnswers[$key])){
-                foreach($correctAnswers[$key] as $answer){
-                    if(strtolower($answer) == strtolower($value)){
-                        $results[$key]["status"] = true;
-                        break;
-                    }
-                    $results[$key]["status"] = false;
-                    $points++;
+            $answer = $questions[$key]['answer'];
+            foreach($answer as $a){
+                if(strtolower($a) == strtolower($value)){
+                    $points += $questions[$key]['points'];
+                    break;
                 }
             }
-            else{
-                if(strtolower($correctAnswers[$key]) == strtolower($value)){
-                    $results[$key]["status"] = true;
-                    $points++;
-                }
-                else{
-                    $results[$key]["status"] = false;
-                }
-            }
-
-            $results[$key]["submitted"] = $value;
-            $results[$key]["correct"] = is_array($correctAnswers[$key]) ? $correctAnswers[$key][0] : $correctAnswers[$key];
         }
-        $results["points"] = $points;
-        
-        return $results;
+        return $points;
     }
 
 }
