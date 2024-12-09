@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Challenge;
-use App\Form\ChallengeType;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
 use App\Form\Admin\ChallengeType as AdminChallengeType;
@@ -83,12 +82,12 @@ final class ChallengeController extends AbstractController
 
             $entityManager->flush();
             $this->addFlash('success', 'Le défi a bien été mis à jour !');
-            //return $this->redirectToRoute('app_admin_challenge_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_challenge_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/challenge/edit.html.twig', [
             'challenge' => $challenge,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -102,4 +101,5 @@ final class ChallengeController extends AbstractController
 
         return $this->redirectToRoute('app_admin_challenge_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

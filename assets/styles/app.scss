@@ -52,8 +52,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
   background: $colorWhite;
   color: #302f2f;
   font-size: 1.8rem;
@@ -103,6 +101,7 @@ h1 {
   width: 20rem;
   height: 20rem;
   background: radial-gradient(circle, #d5e6f7, #dbefff, #cde9ff);
+
   border-radius: 50%;
   box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5),
     0 4px 8px rgba(0, 0, 0, 0.2);
@@ -227,7 +226,7 @@ h1 {
 }
 
 main {
-  padding: 0 2rem;
+  padding: 0 1rem;
   text-align: justify;
 
   section {
@@ -251,6 +250,7 @@ main {
   p {
     margin: 2rem 0;
     text-align: center;
+    line-height: 2.8rem;
     a {
       font-weight: 700;
       color: $colorGreen;
@@ -324,7 +324,7 @@ main {
 
       a {
         display: inline-block;
-        width: calc(20% - 1rem);
+        width: calc(20% - .5rem);
         line-height: 0;
         margin: 0.2rem;
         img {
@@ -342,17 +342,12 @@ main {
     table {
       width: 100%;
       table-layout: auto;
-      //text-align: center;
+      font-size:1.6rem;
 
       th {
-        padding: 1rem 2rem;
+        padding: .5rem 1rem;
         background-color: #f1b846;
         color: #fff;
-
-        &:first-of-type,
-        &:last-of-type:not(.date) {
-          width: 5rem;
-        }
       }
 
       tr:nth-child(odd) {
@@ -371,6 +366,7 @@ main {
 
       label {
         display: inline-block;
+        text-align: left;
         color: $colorGreen;
         margin: 2rem 0 1rem;
         font-weight: 500;
@@ -395,44 +391,44 @@ main {
           display: inline-block;
           width: 4rem;
         }
-      }
+      } 
 
-      & + button.btn.submit {
-        border: none;
-        padding: 1rem;
-        font-size: inherit;
-        color: #ffff;
-        background-color: $colorGreen;
-        cursor: pointer;
+      .audio-type-label{
+        audio{
+          display: block;
+          margin-top:1rem;
+        }
       }
     }
 
     form[name="photo"] {
-      display: flex;
 
-      div#photo {
-        width: 70%;
-        input[type="file"] {
-          display: block;
-          width: 100%;
-          border: 0.1rem solid $colorGreen;
-
-          &::file-selector-button {
-            padding: 1rem;
-            border: none;
-            background-color: $colorGreen;
-            color: #fff;
-            cursor: pointer;
-          }
-        }
+      label {
+        display: inline-block;
+        color: $colorGreen;
+        margin: 2rem 0 1rem;
+        font-weight: 500;
       }
-
-      button {
-        width: 30%;
-        background-color: $colorGreen;
-        border: none;
-        color: #fff;
+      input[type="file"] {
+        display: block;
+        width: 100%;
+        margin: 2rem auto;
+        font-size: inherit; 
       }
+    }
+
+    button.btn.submit {
+      border: none;
+      padding: 1rem;
+      font-size: 1.6rem;
+      color: #ffff;
+      background-color: $colorGreen;
+      cursor: pointer;
+    }
+
+    .already-done{
+      color:#0b5d31;
+      font-weight: 500;
     }
   }
 
@@ -571,6 +567,24 @@ footer {
 
 /*   RESPONSIVE   */
 
+@media screen and (min-width: $phone-down){ //500px
+  main{
+    div#quiz {
+      .audio-type{
+        
+      }
+      .audio-type-label{
+        audio{
+
+          margin-top:1rem;
+        }
+      }
+    }
+  }
+  
+}
+
+
 @media screen and (min-width: $tablet-up) {
   // 700px
   header {
@@ -592,16 +606,31 @@ footer {
   }
 
   main {
+    padding: 0 2rem;
     width: 90%;
     margin: auto;
     .ranking {
-      table td img {
-        display: inline;
-        width: 5rem;
-        margin-right: 2rem;
-        vertical-align: middle;
-        border-radius: 50%;
-      }
+      table{
+        font-size:1.8rem;
+        th {
+          padding: 1rem 2rem;
+
+          &:first-of-type,
+          &:last-of-type:not(.date) {
+            width: 5rem;
+          }
+        }
+        
+        td img {
+          display: inline;
+          width: 5rem;
+          height:5rem;
+          object-fit: cover;
+          margin-right: 2rem;
+          vertical-align: middle;
+          border-radius: 50%;
+        }
+      } 
     }
   }
 }
@@ -621,6 +650,11 @@ footer {
           margin: auto 6rem;
         }
       }
+    }
+
+    .ball{
+      width: 20rem;
+      height: 20rem;
     }
   }
 

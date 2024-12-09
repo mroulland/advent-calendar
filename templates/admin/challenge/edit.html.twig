@@ -5,9 +5,26 @@
 {% block body %}
     <h1>Modifier un défi</h1>
 
+ {# Afficher les messages flash, si existants #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {{ include('admin/challenge/_form.html.twig', {'button_label': 'Modifier'}) }}
 
     <a class="btn back" href="{{ path('app_admin_challenge_index') }}">Retour à la liste</a>
 
     {{ include('admin/challenge/_delete_form.html.twig') }}
+
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('.ckeditor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 {% endblock %}

@@ -27,8 +27,8 @@
 /assets/vendor/
 /assets/imgs/challenges
 /assets/imgs/profile_pictures
-
 ###< symfony/asset-mapper ###
 
 # divers
 /.prettierrc
+

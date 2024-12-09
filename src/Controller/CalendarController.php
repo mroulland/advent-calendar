@@ -26,7 +26,8 @@ class CalendarController extends AbstractController
     public function index(?Calendar $calendar, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
 
-        if(!isset($calendar) || !$calendar->getChallenge()){
+        if( !isset($calendar) || !$calendar->getChallenge() || 
+            ($calendar->getDate() > new DateTime('now') && $this->denyAccessUnlessGranted('ROLE_ADMIN'))){
             return $this->redirectToRoute('app_main');
         }
 
@@ -81,8 +82,7 @@ class CalendarController extends AbstractController
                     $directory = $challenge->getUploadDirectory();
                     try {
                         $pictureFile->move(
-                            $this->getParameter('kernel.project_dir') . '/assets/imgs/'.$directory, $pictureFilename);
-                        
+                            $this->getParameter('kernel.project_dir') . '/public/uploads/challenges/'.$directory, $pictureFilename);
                         $ranking->setDetails([$pictureFilename]);
                         $points = 5;
                             
@@ -91,6 +91,9 @@ class CalendarController extends AbstractController
                     }
                 }
             }
+
+            if(!$manager->getRepository(Ranking::class)->findByChallenge($challenge)) $points += 2;
+            
             $ranking->setPoints($points);
             $manager->persist($ranking);
             $manager->flush();

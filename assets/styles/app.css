@@ -38,8 +38,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
   background: #fff;
   color: #302f2f;
   font-size: 1.8rem;
@@ -176,7 +174,7 @@ h1 span {
   }
 }
 main {
-  padding: 0 2rem;
+  padding: 0 1rem;
   text-align: justify;
 }
 main section {
@@ -197,6 +195,7 @@ main h3 {
 main p {
   margin: 2rem 0;
   text-align: center;
+  line-height: 2.8rem;
 }
 main p a {
   font-weight: 700;
@@ -260,7 +259,7 @@ main .calendar div.table {
 }
 main .calendar div.table a {
   display: inline-block;
-  width: calc(20% - 1rem);
+  width: calc(20% - 0.5rem);
   line-height: 0;
   margin: 0.2rem;
 }
@@ -273,14 +272,12 @@ main .calendar table {
 main .ranking table {
   width: 100%;
   table-layout: auto;
+  font-size: 1.6rem;
 }
 main .ranking table th {
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   background-color: #f1b846;
   color: #fff;
-}
-main .ranking table th:first-of-type, main .ranking table th:last-of-type:not(.date) {
-  width: 5rem;
 }
 main .ranking table tr:nth-child(odd) {
   background-color: rgba(241, 184, 70, 0.6666666667);
@@ -293,6 +290,7 @@ main section.game div#quiz {
 }
 main section.game div#quiz label {
   display: inline-block;
+  text-align: left;
   color: #0b5d31;
   margin: 2rem 0 1rem;
   font-weight: 500;
@@ -314,37 +312,33 @@ main section.game div#quiz .choice-type input {
   display: inline-block;
   width: 4rem;
 }
-main section.game div#quiz + button.btn.submit {
+main section.game div#quiz .audio-type-label audio {
+  display: block;
+  margin-top: 1rem;
+}
+main section.game form[name=photo] label {
+  display: inline-block;
+  color: #0b5d31;
+  margin: 2rem 0 1rem;
+  font-weight: 500;
+}
+main section.game form[name=photo] input[type=file] {
+  display: block;
+  width: 100%;
+  margin: 2rem auto;
+  font-size: inherit;
+}
+main section.game button.btn.submit {
   border: none;
   padding: 1rem;
-  font-size: inherit;
+  font-size: 1.6rem;
   color: white;
   background-color: #0b5d31;
   cursor: pointer;
 }
-main section.game form[name=photo] {
-  display: flex;
-}
-main section.game form[name=photo] div#photo {
-  width: 70%;
-}
-main section.game form[name=photo] div#photo input[type=file] {
-  display: block;
-  width: 100%;
-  border: 0.1rem solid #0b5d31;
-}
-main section.game form[name=photo] div#photo input[type=file]::file-selector-button {
-  padding: 1rem;
-  border: none;
-  background-color: #0b5d31;
-  color: #fff;
-  cursor: pointer;
-}
-main section.game form[name=photo] button {
-  width: 30%;
-  background-color: #0b5d31;
-  border: none;
-  color: #fff;
+main section.game .already-done {
+  color: #0b5d31;
+  font-weight: 500;
 }
 main section.galerie .elements {
   display: grid;
@@ -454,6 +448,11 @@ footer {
 }
 
 /*   RESPONSIVE   */
+@media screen and (min-width: 500px) {
+  main div#quiz .audio-type-label audio {
+    margin-top: 1rem;
+  }
+}
 @media screen and (min-width: 768px) {
   header {
     position: relative;
@@ -471,12 +470,25 @@ footer {
     text-shadow: 5px 2px 9px black;
   }
   main {
+    padding: 0 2rem;
     width: 90%;
     margin: auto;
+  }
+  main .ranking table {
+    font-size: 1.8rem;
+  }
+  main .ranking table th {
+    padding: 1rem 2rem;
+  }
+  main .ranking table th:first-of-type, main .ranking table th:last-of-type:not(.date) {
+    width: 5rem;
   }
   main .ranking table td img {
     display: inline;
     width: 5rem;
+    height: 5rem;
+    -o-object-fit: cover;
+       object-fit: cover;
     margin-right: 2rem;
     vertical-align: middle;
     border-radius: 50%;
@@ -494,6 +506,10 @@ footer {
   }
   header nav ul li {
     margin: auto 6rem;
+  }
+  header .ball {
+    width: 20rem;
+    height: 20rem;
   }
   body {
     font-size: 2rem;
