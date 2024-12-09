@@ -285,34 +285,37 @@ main .ranking table tr:nth-child(odd) {
 main .ranking table td {
   padding: 1rem 2rem;
 }
-main section.game div#quiz {
+main section.game div#quiz, main section.game div#participation {
   margin-bottom: 2rem;
 }
-main section.game div#quiz label {
+main section.game div#quiz label, main section.game div#participation label {
   display: inline-block;
   text-align: left;
   color: #0b5d31;
   margin: 2rem 0 1rem;
   font-weight: 500;
 }
-main section.game div#quiz input.text-type {
+main section.game div#quiz .text-type, main section.game div#participation .text-type {
   display: block;
   width: 100%;
   padding: 1rem;
   margin: 1rem 0 2rem;
 }
-main section.game div#quiz .choice-type > label {
+main section.game div#quiz textarea, main section.game div#participation textarea {
+  height: 10rem;
+}
+main section.game div#quiz .choice-type > label, main section.game div#participation .choice-type > label {
   margin: 0 0 1rem 0;
   display: inline-block;
   width: calc(100% - 4rem);
   color: #302f2f;
   font-weight: 400;
 }
-main section.game div#quiz .choice-type input {
+main section.game div#quiz .choice-type input, main section.game div#participation .choice-type input {
   display: inline-block;
   width: 4rem;
 }
-main section.game div#quiz .audio-type-label audio {
+main section.game div#quiz .audio-type-label audio, main section.game div#participation .audio-type-label audio {
   display: block;
   margin-top: 1rem;
 }
@@ -342,9 +345,17 @@ main section.game .already-done {
 }
 main section.galerie .elements {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   gap: 10px;
   margin: 2rem auto;
+}
+main section.galerie .elements.participation {
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+}
+main section.galerie .elements.photo {
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+}
+main section.galerie .elements.photo a {
+  line-height: 0;
 }
 main section.galerie .elements figure {
   margin: 0;
@@ -353,8 +364,25 @@ main section.galerie .elements figure {
   flex-direction: column;
   align-items: center;
 }
-main section.galerie .elements figure a {
-  line-height: 0;
+main section.galerie .elements figure.text {
+  border-radius: 0.8rem;
+  border: #d89a1e 0.1rem solid;
+  justify-content: space-between;
+}
+main section.galerie .elements figure.text a {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  min-height: 15rem;
+  text-align: justify;
+}
+main section.galerie .elements figure.text span.title {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #d89a1e;
 }
 main section.galerie .elements figure img {
   width: 100%;

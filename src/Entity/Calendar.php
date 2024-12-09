@@ -14,9 +14,9 @@ class Calendar
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
-
+    
     #[ORM\OneToOne(targetEntity: Challenge::class, inversedBy: 'calendar')]
     private ?Challenge $challenge = null;
 

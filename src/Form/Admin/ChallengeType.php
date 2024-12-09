@@ -3,6 +3,7 @@
 namespace App\Form\Admin;
 
 use App\Entity\Challenge;
+use App\Entity\ParticipationChallenge;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
 use Symfony\Component\Form\AbstractType;
@@ -23,6 +24,7 @@ class ChallengeType extends AbstractType
             'choices' => [
                 'Quiz' => 'quiz',
                 'Photo' => 'photo',
+                'Participation' => 'participation',
             ],
             'mapped' => false,
             'label' => 'Type de défi'
@@ -42,7 +44,7 @@ class ChallengeType extends AbstractType
 
         
         // Ajout conditionnel du sous-formulaire
-        if ($options['data'] instanceof QuizChallenge) {
+        if ($options['data'] instanceof QuizChallenge || $options['data'] instanceof ParticipationChallenge) {
             $builder->add('questions', TextareaType::class, [
                 'required' => false,
                 'label' => 'Questions'

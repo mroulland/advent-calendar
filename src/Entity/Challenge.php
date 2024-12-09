@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ChallengeRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: "type", type: "string")]
-#[ORM\DiscriminatorMap(["quiz" => QuizChallenge::class, "photo" => PhotoChallenge::class])]
+#[ORM\DiscriminatorMap(["quiz" => QuizChallenge::class, "photo" => PhotoChallenge::class, "participation" => ParticipationChallenge::class])]
 class Challenge
 {
     #[ORM\Id]

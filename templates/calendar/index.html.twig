@@ -30,11 +30,13 @@
             {{ include('calendar/_quiz.html.twig')}} 
         {% elseif type == 'photo' %}
             {{ include('calendar/_photo.html.twig')}}
+        {% elseif type == 'participation' %}
+            {{ include('calendar/_participation.html.twig')}}
         {% endif %}
 
     {% endif %}
     </section>
-    {% if type == 'photo' %}
+    {% if type == 'photo' or type == 'participation' %}
         {{ include('includes/_galerie.html.twig')}}
     {% endif %}
 

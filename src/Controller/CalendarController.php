@@ -9,14 +9,16 @@ use App\Form\PhotoType;
 use App\Entity\Calendar;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
+use App\Form\ParticipationType;
+use App\Entity\ParticipationChallenge;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/calendar')]
 class CalendarController extends AbstractController
@@ -48,6 +50,12 @@ class CalendarController extends AbstractController
         {
             $type = "photo";
             $form = $this->createForm(PhotoType::class);
+        }
+        elseif($challenge instanceof ParticipationChallenge)
+        {
+            $type = "participation";
+            $questions = $challenge->getQuestions();
+            $form = $this->createForm(ParticipationType::class, null, ['questions' => $questions]);
         }else
         {
             return $this->redirectToRoute('app_main');
@@ -71,6 +79,14 @@ class CalendarController extends AbstractController
                 // Validation des réponses : 
                 $points = $this->validateAnswers($submittedAnswers, $questions);
 
+            }
+            elseif($challenge instanceof ParticipationChallenge)
+            {
+                
+                $submittedAnswers = $form->getData();
+                $ranking->setDetails($submittedAnswers);
+
+                $points = $questions["points"];
             }
             elseif($challenge instanceof PhotoChallenge)
             {
@@ -119,13 +135,22 @@ class CalendarController extends AbstractController
 
         foreach($submittedAnswers as $key => $value)
         {
-            $answer = $questions[$key]['answer'];
-            foreach($answer as $a){
-                if(strtolower($a) == strtolower($value)){
-                    $points += $questions[$key]['points'];
-                    break;
+            
+            if(isset($questions[$key]['answer']))
+            {
+                $answer = $questions[$key]['answer'];
+                foreach($answer as $a){
+                    if(strtolower($a) == strtolower($value)){
+                        $points += $questions[$key]['points'];
+                        break;
+                    }
                 }
             }
+            else
+            {
+                $points += $questions[$key]['points'];
+            }
+            
         }
         return $points;
     }

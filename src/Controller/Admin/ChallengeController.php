@@ -3,11 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Challenge;
+use App\Entity\ParticipationChallenge;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
 use App\Form\Admin\ChallengeType as AdminChallengeType;
 use App\Repository\ChallengeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Egulias\EmailValidator\Parser\PartParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -38,6 +40,8 @@ final class ChallengeController extends AbstractController
                 $challenge = new QuizChallenge();
             } elseif ($type === 'photo') {
                 $challenge = new PhotoChallenge();
+            } elseif ($type === 'participation') {
+                $challenge = new ParticipationChallenge();
             }
 
             if ($challenge) {
@@ -70,7 +74,7 @@ final class ChallengeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($challenge instanceof QuizChallenge) {
+            if ($challenge instanceof QuizChallenge || $challenge instanceof ParticipationChallenge) {
                 $questions = $form->get('questions')->getData();
                 $challenge->setQuestions($questions);
             }
