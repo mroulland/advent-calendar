@@ -456,7 +456,7 @@ footer {
 @media screen and (min-width: 768px) {
   header {
     position: relative;
-    background-image: url(../../assets/imgs/bg/pexels-barry-plott-48592-753410.jpg);
+    background-image: url(../../assets/imgs/bg/header_background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
   }

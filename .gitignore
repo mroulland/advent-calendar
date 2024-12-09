@@ -1,6 +1,7 @@
 # env
-/.env
-/.env.*
+
+.env
+.env.*
 
 ###> symfony/framework-bundle ###
 /config/secrets/prod/prod.decrypt.private.php
@@ -31,4 +32,3 @@
 
 # divers
 /.prettierrc
-
