@@ -361,68 +361,6 @@ main {
 
       td {
         padding: 1rem 2rem;
-
-    label {
-      color: $colorGreen;
-    }
-
-    input:not([type="checkbox"]) {
-      display: block;
-      width: 50%;
-      margin: 0.5rem auto 1rem;
-      padding: 0.5rem;
-      color: #5c5b5b;
-      text-align: center;
-      font-weight: inherit;
-    }
-
-    small {
-      color: #d89a1e;
-    }
-
-    button[type="submit"] {
-      display: block;
-      margin: 1rem auto;
-      padding: 0.5rem;
-      width: 50%;
-      background-color: #f1b846;
-      color: #fff;
-      border: none;
-      font-size: inherit;
-      font-family: inherit;
-      cursor: pointer;
-    }
-  }
-
-  .profile {
-    .infos {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      margin-bottom: 3rem;
-
-      p:first-of-type {
-        font-size: 1.2em;
-        font-weight: 600;
-        color: $colorGreen;
-      }
-
-      img {
-        width: 30%;
-      }
-
-      a {
-        display: block;
-        margin: 1rem 0;
-        padding: 0.5rem;
-        text-align: center;
-        background-color: $colorGreen;
-        color: #fff;
-        cursor: pointer;
-        img {
-          display: none;
-        }
       }
     }
   }
@@ -580,8 +518,9 @@ main {
   .profile {
     .infos {
       display: flex;
+      flex-direction: column;
       justify-content: space-around;
-      align-items: stretch;
+      align-items: center;
       margin-bottom: 3rem;
 
       p:first-of-type {
@@ -601,7 +540,7 @@ main {
         text-align: center;
         background-color: $colorGreen;
         color: #fff;
-        cursor: pointer;
+        cursor: pointer;   
       }
     }
   }

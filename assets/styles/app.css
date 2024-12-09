@@ -289,9 +289,6 @@ main .ranking table tr:nth-child(odd) {
 main .ranking table td {
   padding: 1rem 2rem;
 }
-main .ranking table td img {
-  display: none;
-}
 main section.game div#quiz {
   margin-bottom: 2rem;
 }
@@ -426,8 +423,9 @@ main .login-form button[type=submit] {
 }
 main .profile .infos {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: stretch;
+  align-items: center;
   margin-bottom: 3rem;
 }
 main .profile .infos p:first-of-type {
@@ -511,11 +509,13 @@ footer {
     width: 80%;
     margin: auto;
   }
-  body main .register-form input:not([type=checkbox]), body main .login-form input:not([type=checkbox]) {
+  body main .register-form input:not([type=checkbox]),
+  body main .login-form input:not([type=checkbox]) {
     max-width: 45rem;
     font-size: inherit;
   }
-  body main .register-form button[type=submit], body main .login-form button[type=submit] {
+  body main .register-form button[type=submit],
+  body main .login-form button[type=submit] {
     max-width: 45rem;
   }
 }
