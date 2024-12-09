@@ -71,8 +71,7 @@ h1 {
   text-align: center;
   line-height: 0.7;
 }
-
-span {
+h1 span {
   font-size: 0.75em;
   display: block;
   color: #da1600;
