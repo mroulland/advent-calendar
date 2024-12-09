@@ -356,6 +356,16 @@ main {
 
       td {
         padding: 1rem 2rem;
+
+        img {
+          display: inline;
+          width: 4rem;
+          height:4rem;
+          object-fit: cover;
+          margin-right: 1rem;
+          vertical-align: middle;
+          border-radius: 50%;
+        }
       }
     }
   }
@@ -604,12 +614,8 @@ footer {
 @media screen and (min-width: $phone-down){ //500px
   main{
     div#quiz {
-      .audio-type{
-        
-      }
       .audio-type-label{
         audio{
-
           margin-top:1rem;
         }
       }
@@ -656,13 +662,9 @@ footer {
         }
         
         td img {
-          display: inline;
+          margin-right: 2rem;
           width: 5rem;
           height:5rem;
-          object-fit: cover;
-          margin-right: 2rem;
-          vertical-align: middle;
-          border-radius: 50%;
         }
       } 
     }

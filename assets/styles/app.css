@@ -285,6 +285,16 @@ main .ranking table tr:nth-child(odd) {
 main .ranking table td {
   padding: 1rem 2rem;
 }
+main .ranking table td img {
+  display: inline;
+  width: 4rem;
+  height: 4rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-right: 1rem;
+  vertical-align: middle;
+  border-radius: 50%;
+}
 main section.game div#quiz, main section.game div#participation {
   margin-bottom: 2rem;
 }
@@ -512,14 +522,9 @@ footer {
     width: 5rem;
   }
   main .ranking table td img {
-    display: inline;
+    margin-right: 2rem;
     width: 5rem;
     height: 5rem;
-    -o-object-fit: cover;
-       object-fit: cover;
-    margin-right: 2rem;
-    vertical-align: middle;
-    border-radius: 50%;
   }
 }
 @media screen and (min-width: 1024px) {
