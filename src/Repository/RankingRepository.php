@@ -3,7 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Ranking;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\PhotoChallenge;
+use Doctrine\DBAL\Portability\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -64,15 +65,4 @@ class RankingRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-       
-
-    //    public function findOneBySomeField($value): ?Ranking
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

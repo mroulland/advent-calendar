@@ -21,7 +21,7 @@ class Challenge
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
-
+    
     /**
      * @var Collection<int, Ranking>
      */
@@ -54,6 +54,11 @@ class Challenge
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getType(): string
+    {
+        return (new \ReflectionClass($this))->getShortName();
     }
 
     /**

@@ -16,15 +16,16 @@
             <nav>
                 <ul>
                     <li><a href="{{path('app_main')}}"><img src="{{asset('imgs/icons/house-tree.png')}}" width=30 alt="home"></a></li>
+                    <li><a href="{{path('app_galerie')}}">Galerie</a></li>
 
                     {% if app.user %}
                     <li>
                         <a href="{{path('app_profile')}}">Profil</a>
                     </li>
                         {% if 'ROLE_ADMIN' in app.user.roles  %}
-                        <li>
-                            <a href="{{path('app_admin_calendar_index')}}">Admin</a>
-                        </li>
+                    <li>
+                        <a href="{{path('app_admin_calendar_index')}}">Admin</a>
+                    </li>
                         {% endif %}
                     {% endif %}
                 </ul>

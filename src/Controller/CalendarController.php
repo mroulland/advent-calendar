@@ -121,11 +121,11 @@ class CalendarController extends AbstractController
         return $this->render('calendar/index.html.twig', [
             'controller_name' => 'CalendarController',
             'calendar' => $calendar,
-             'already_done' => $already_done,
-             'type' => $type,
-             'form' => $form,
-             'rankings' => $rankings,
-             'points' => $points
+            'already_done' => $already_done,
+            'type' => $type,
+            'form' => $form,
+            'rankings' => $rankings,
+            'points' => $points
         ]);
     }
 

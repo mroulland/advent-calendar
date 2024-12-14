@@ -450,17 +450,13 @@ main {
       display: grid;
       gap: 10px;
       margin: 2rem auto;
-
-      &.participation{
-        grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
-      }
+      grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+      
 
       &.photo{
         grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
 
-        a {
-          line-height: 0;
-        }
+        
       }
 
       figure {
@@ -491,6 +487,12 @@ main {
             font-size:1.2em;
             font-weight: 600;
             color:#d89a1e;
+          }
+        }
+
+        &.photo{
+          a {
+            line-height: 0;
           }
         }
 

@@ -357,15 +357,10 @@ main section.galerie .elements {
   display: grid;
   gap: 10px;
   margin: 2rem auto;
-}
-main section.galerie .elements.participation {
   grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
 }
 main section.galerie .elements.photo {
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-}
-main section.galerie .elements.photo a {
-  line-height: 0;
 }
 main section.galerie .elements figure {
   margin: 0;
@@ -393,6 +388,9 @@ main section.galerie .elements figure.text span.title {
   font-size: 1.2em;
   font-weight: 600;
   color: #d89a1e;
+}
+main section.galerie .elements figure.photo a {
+  line-height: 0;
 }
 main section.galerie .elements figure img {
   width: 100%;
