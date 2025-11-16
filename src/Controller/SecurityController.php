@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
+use App\Service\PasswordResetService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -94,6 +96,103 @@ class SecurityController extends AbstractController
 
         ]);
     }
+
+    #[Route('/mot-de-passe-oublie', name: 'app_forgot_password')]
+    public function forgotPassword(
+        Request $request,
+        EntityManagerInterface $em,
+        PasswordResetService $resetService,
+        \Symfony\Component\Mailer\MailerInterface $mailer
+    ): Response {
+
+        if ($request->isMethod('POST')) {
+            $email = $request->request->get('email');
+
+            $user = $em->getRepository(User::class)->findOneBy(['email' => $email]);
+
+
+            if ($user) {
+                // 1. Génération du token
+                $token = $resetService->generateResetToken($user);
+
+                $em->flush();
+
+                // 2. Envoi du mail
+                $resetUrl = $this->generateUrl(
+                    'app_reset_password',
+                    ['token' => $token],
+                    \Symfony\Component\Routing\Generator\UrlGeneratorInterface::ABSOLUTE_URL
+                );
+
+                $emailMessage = (new \Symfony\Component\Mime\Email())
+                    ->from('no-reply@pixelsandcookies.fr')
+                    ->to($user->getEmail())
+                    ->subject('Réinitialisation de votre mot de passe')
+                    ->html("
+                        <p>Bonjour,</p>
+                        <p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p>
+                        <p><a href='$resetUrl'>$resetUrl</a></p>
+                        <p>Ce lien expire dans 1 heure.</p>
+                    ");
+
+                    
+                $mailer->send($emailMessage);
+            }
+
+            $this->addFlash('success', 'Si un compte existe, un email a été envoyé. <br/> Vérifiez votre boîte de réception ainsi que votre dossier spam.');
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('security/forgot_password.html.twig');
+    }
+
+    #[Route('/reinitialiser-mot-de-passe/{token}', name: 'app_reset_password')]
+    public function resetPassword(
+        string $token,
+        Request $request,
+        UserRepository $userRepository,
+        EntityManagerInterface $em,
+        PasswordResetService $resetService,
+        UserPasswordHasherInterface $passwordHasher
+    ): Response {
+        /** @var User|null $user */
+        //$user = $em->getRepository(User::class)->findOneBy(['tokenHash' => $token]);
+        $user = $userRepository->findOneByValidResetToken($token);
+
+        if (!$user ) {
+            $this->addFlash('danger', 'Le lien de réinitialisation est invalide ou expiré.');
+            return $this->redirectToRoute('app_forgot_password');
+        }
+
+        if ($request->isMethod('POST')) {
+            $newPassword = $request->request->get('password');
+
+            if (strlen($newPassword) < 6) {
+                $this->addFlash('danger', 'Le mot de passe doit faire au moins 6 caractères.');
+                return $this->redirectToRoute('app_reset_password', ['token' => $token]);
+            }
+
+            // Mise à jour du mot de passe
+            $user->setPassword(
+                $passwordHasher->hashPassword($user, $newPassword)
+            );
+
+            // Suppression du token
+            $user->setTokenHash(null);
+            $user->setTokenHashExpiresAt(null);
+
+            $em->flush();
+
+            $this->addFlash('success', 'Votre mot de passe a été changé avec succès !');
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('security/reset_password.html.twig', [
+            'token' => $token,
+        ]);
+    }
+
+
 
 
 }

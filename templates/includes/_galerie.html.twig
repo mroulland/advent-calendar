@@ -13,8 +13,8 @@
                 </figure>
                  {% elseif ranking.challenge.type == 'ParticipationChallenge' %}
                 <figure class="text">
-                    <a href="{{ranking.details['link']}}" target="_blank">
-                        <span class='title'>{{ranking.details['title']}}</span>
+                    <a {% if ranking.details['link'] is defined %}href="{{ranking.details['link']}}"{% endif %} target="_blank">
+                        {% if ranking.details['title'] is defined %}<span class='title'>{{ranking.details['title']}}</span>{% endif %}
                         {{ranking.details['content']}}
                     </a>
                     <figcaption>{{ranking.user.firstname}}</figcaption>

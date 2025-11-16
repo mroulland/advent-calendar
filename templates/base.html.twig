@@ -38,10 +38,18 @@
                         <div class="snowflake"></div>
                     {% endfor %}
                 </div>
-                <div class="count">J-{{ (date('now').diff(date('12/25/2024'))).days }}</div>
+                <div class="count">J-{{ (date('now').diff(date('12/25/2025'))).days }}</div>
             </div>
         </header>
         <main>
+
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message|raw }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
         {% block body %}{% endblock %}
         </main>      
         <script src="{{ asset('snowfall.js') }}"></script>

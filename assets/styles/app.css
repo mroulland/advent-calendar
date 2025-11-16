@@ -411,19 +411,23 @@ main section.galerie .elements figure figcaption {
   border-radius: 0 0 0.8rem 0.8rem;
 }
 main .register-form,
-main .login-form {
+main .login-form,
+main .forgot-password-form {
   text-align: center;
 }
 main .register-form h2,
-main .login-form h2 {
+main .login-form h2,
+main .forgot-password-form h2 {
   color: #0b5d31;
 }
 main .register-form label,
-main .login-form label {
+main .login-form label,
+main .forgot-password-form label {
   color: #0b5d31;
 }
 main .register-form input:not([type=checkbox]),
-main .login-form input:not([type=checkbox]) {
+main .login-form input:not([type=checkbox]),
+main .forgot-password-form input:not([type=checkbox]) {
   display: block;
   width: 80%;
   margin: 0.5rem auto 1rem;
@@ -434,11 +438,13 @@ main .login-form input:not([type=checkbox]) {
   font-weight: inherit;
 }
 main .register-form small,
-main .login-form small {
+main .login-form small,
+main .forgot-password-form small {
   color: #d89a1e;
 }
 main .register-form button[type=submit],
-main .login-form button[type=submit] {
+main .login-form button[type=submit],
+main .forgot-password-form button[type=submit] {
   display: block;
   margin: 1rem auto;
   padding: 0.5rem;
@@ -473,6 +479,13 @@ main .profile .infos a {
   background-color: #0b5d31;
   color: #fff;
   cursor: pointer;
+}
+main div.alert.alert-success {
+  background-color: #ede0c5;
+  font-weight: 500;
+  text-align: center;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 footer {
@@ -556,12 +569,14 @@ footer {
     margin: auto;
   }
   body main .register-form input:not([type=checkbox]),
-  body main .login-form input:not([type=checkbox]) {
+  body main .login-form input:not([type=checkbox]),
+  body main .forgot-password-form input:not([type=checkbox]) {
     max-width: 45rem;
     font-size: inherit;
   }
   body main .register-form button[type=submit],
-  body main .login-form button[type=submit] {
+  body main .login-form button[type=submit],
+  body main .forgot-password-form button[type=submit] {
     max-width: 45rem;
   }
 }

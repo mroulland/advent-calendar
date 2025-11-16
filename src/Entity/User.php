@@ -57,6 +57,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Ranking::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $rankings;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $tokenHash = null;
+
+    #[ORM\Column(type:'datetime', nullable: true)]
+    private ?\DateTimeInterface $tokenHashExpiresAt = null;
+
     public function __construct()
     {
         $this->rankings = new ArrayCollection();
@@ -218,4 +224,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getTokenHash(): ?string
+    {
+        return $this->tokenHash;
+    }
+
+    public function setTokenHash(?string $tokenHash): static
+    {
+        $this->tokenHash = $tokenHash;
+
+        return $this;
+    }
+
+    public function getTokenHashExpiresAt(): ?\DateTimeInterface
+    {
+        return $this->tokenHashExpiresAt;
+    }
+
+    public function setTokenHashExpiresAt(?\DateTimeInterface $tokenHashExpiresAt): static
+    {
+        $this->tokenHashExpiresAt = $tokenHashExpiresAt;
+
+        return $this;
+    }
+
+    public function isTokenHashValid(): bool
+    {
+        return $this->tokenHash !== null
+            && $this->tokenHashExpiresAt !== null
+            && $this->tokenHashExpiresAt > new \DateTimeImmutable();
+    }
+    
 }
