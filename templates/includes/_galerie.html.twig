@@ -1,7 +1,7 @@
 <section class="galerie">
 <h2>Galerie des participations</h2>
-    <div class="elements {% if calendar.challenge.type is defined and calendar.challenge.type == 'PhotoChallenge' %} photo {% endif %}">
     {% if rankings is not empty %}
+    <div class="elements {% if calendar.challenge.type is defined and calendar.challenge.type == 'PhotoChallenge' %} photo {% endif %}">
         {% for ranking in rankings %}
             {% if ranking.details is not empty %}
                 {% if ranking.challenge.type == 'PhotoChallenge' %}
@@ -22,6 +22,36 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-    {% endif %}
     </div>
+    {% else %}
+        <p>Aucune participation pour le moment.</p>
+    {% endif %}
+
+    {% if oldRankings is not empty %}
+    <h2>Participations des années précédentes</h2>
+        <div class="elements">
+        {% for oldRanking in oldRankings %}
+            {% if oldRanking.details is not empty %}
+                {% if oldRanking.challenge.type == 'PhotoChallenge' %}
+                <figure class='photo'>
+                    <a href="{{asset('uploads/challenges/' ~ oldRanking.challenge.uploadDirectory ~ oldRanking.details[0])}}" target="_blank">
+                        <img src="{{asset('uploads/challenges/' ~ oldRanking.challenge.uploadDirectory ~ oldRanking.details[0])}}" alt="participation de {{oldRanking.user.firstname}}" width=100>
+                    </a>
+                    <figcaption>{{oldRanking.user.firstname}}</figcaption>
+                </figure>
+                    {% elseif oldRanking.challenge.type == 'ParticipationChallenge' %}
+                <figure class="text">
+                    <a {% if oldRanking.details['link'] is defined %}href="{{oldRanking.details['link']}}"{% endif %} target="_blank">
+                        {% if oldRanking.details['title'] is defined %}<span class='title'>{{oldRanking.details['title']}}</span>{% endif %}
+                        {{oldRanking.details['content']}}
+                    </a>
+                    <figcaption>{{oldRanking.user.firstname}}</figcaption>
+                </figure>
+                {% endif %}
+            {% endif %}
+            
+    
+        {% endfor %}
+    </div>
+    {% endif %}
 </section>

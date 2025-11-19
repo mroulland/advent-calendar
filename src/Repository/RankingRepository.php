@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\AdventCalendar;
 use App\Entity\Ranking;
 use App\Entity\PhotoChallenge;
 use Doctrine\DBAL\Portability\Connection;
@@ -24,11 +25,15 @@ class RankingRepository extends ServiceEntityRepository
      *
      * @return Ranking[]
      */
-    public function findGlobalRanking()
+    public function findGlobalRanking(AdventCalendar $calendar)
     {
         return $this->createQueryBuilder('r')
         ->select('r, SUM(r.points) AS totalPoints')
         ->join('r.user', 'u')
+        ->join('r.challenge', 'c')
+        ->join('c.calendar', 'cal')
+        ->where('cal.adventCalendar = :calendar')
+        ->setParameter('calendar', $calendar)
         ->groupBy('u')
         ->orderBy('totalPoints', 'DESC')
         ->getQuery()
@@ -64,5 +69,30 @@ class RankingRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findCurrentYearParticipations(int $year)
+    {
+        return $this->createQueryBuilder('r')
+            ->join('r.challenge', 'c')
+            ->join('c.calendar', 'cal')
+            ->join('cal.adventCalendar', 'ac')
+            ->where('ac.year = :year')
+            ->setParameter('year', $year)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPastParticipations(int $year)
+    {
+        return $this->createQueryBuilder('r')
+            ->join('r.challenge', 'c')
+            ->join('c.calendar', 'cal')
+            ->join('cal.adventCalendar', 'ac')
+            ->where('ac.year < :year')
+            ->setParameter('year', $year)
+            ->orderBy('ac.year', 'DESC')  // tri du plus récent au plus ancien
+            ->getQuery()
+            ->getResult();
     }
 }

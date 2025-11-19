@@ -23,6 +23,10 @@ class Calendar
     #[ORM\Column(length: 255)]
     private ?string $picture = null;
 
+    #[ORM\ManyToOne(inversedBy: 'calendars')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?AdventCalendar $adventCalendar = null;
+
 
     public function getId(): ?int
     {
@@ -64,6 +68,18 @@ class Calendar
     public function setPicture(string $picture): static
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getAdventCalendar(): ?AdventCalendar
+    {
+        return $this->adventCalendar;
+    }
+
+    public function setAdventCalendar(?AdventCalendar $adventCalendar): static
+    {
+        $this->adventCalendar = $adventCalendar;
 
         return $this;
     }
