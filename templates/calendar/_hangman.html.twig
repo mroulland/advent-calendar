@@ -1,0 +1,97 @@
+{% if already_done %}
+    <p class="already-done">Tu as déjà participé à ce défi, rendez-vous au suivant !</p>
+    
+{% else %}
+    {{ form_start(form,{ 'attr': { 'data-turbo': 'false' }}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+<div class="hangman-content">
+    <div id="word"></div>
+    <div id="letters"></div>
+    <div id="errors">Erreurs : 0</div>
+    <div id="attempts">Tentatives : 0</div>
+
+    <div id="letters"></div>
+</div>
+    
+
+    <script>
+        const secretWord = "{{ word }}";
+        const word = secretWord.toLowerCase();
+
+
+        let guessed = [];
+        let errors = 0;
+        let attempts = 0;
+
+        function getDisplayedWord() {
+            return word
+                .split("")
+                .map(letter => {
+                    if (letter === " ") {
+                        return "\u00A0"; // L’espace reste un espace !
+                    }
+                    return guessed.includes(letter) ? letter : "_";
+                })
+                .join(" ");
+        }
+
+        function displayWord() {
+            document.getElementById("word").textContent = getDisplayedWord();
+        }
+
+
+        function guessLetter(letter) {
+            if (guessed.includes(letter)) return;
+
+            guessed.push(letter);
+
+            // Désactiver le bouton visuellement
+            const btn = document.getElementById("letter-" + letter);
+            if (btn) {
+                btn.classList.add("used");
+                btn.disabled = true; // empêche de recliquer
+            }
+            
+            if (!word.includes(letter)) {
+                errors++;
+                document.getElementById("errors").textContent = "Erreurs : " + errors;
+            }
+
+            attempts++;
+            document.getElementById("attempts").textContent = "Tentatives : " + attempts;
+
+            displayWord();
+            checkEndGame();
+        }
+
+        function checkEndGame() {
+            if (!getDisplayedWord().includes("_")) {
+                document.getElementById("hangman_word").value = secretWord;
+                document.getElementById("hangman_attempts").value = attempts;
+
+                document.getElementsByTagName("form")[0].submit();
+            }
+            if (errors >= 6) {
+                alert("Perdu ! Le mot était : " + word);
+            }
+        }
+
+        displayWord();
+
+        const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+        const lettersDiv = document.getElementById("letters");
+
+        alphabet.forEach(l => {
+            const btn = document.createElement("button");
+            btn.textContent = l;
+            btn.classList.add("letter");
+            btn.id = "letter-" + l;
+            btn.onclick = () => guessLetter(l);
+            lettersDiv.appendChild(btn);
+        });
+    
+    </script>
+
+{% endif %}

@@ -3,16 +3,17 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Challenge;
-use App\Entity\ParticipationChallenge;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
-use App\Form\Admin\ChallengeType as AdminChallengeType;
+use App\Entity\HangmanChallenge;
+use App\Entity\ParticipationChallenge;
 use App\Repository\ChallengeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Egulias\EmailValidator\Parser\PartParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Form\Admin\ChallengeType as AdminChallengeType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/challenge')]
@@ -42,6 +43,8 @@ final class ChallengeController extends AbstractController
                 $challenge = new PhotoChallenge();
             } elseif ($type === 'participation') {
                 $challenge = new ParticipationChallenge();
+            } elseif ($type === 'hangman') {
+                $challenge = new HangmanChallenge();
             }
 
             if ($challenge) {
@@ -82,6 +85,16 @@ final class ChallengeController extends AbstractController
             if ($challenge instanceof PhotoChallenge) {
                 $uploadDirectory = $form->get('uploadDirectory')->getData();
                 $challenge->setUploadDirectory($uploadDirectory);
+            }
+
+            if ($challenge instanceof HangmanChallenge) {
+                $word = $form->get('word')->getData();
+                $hint = $form->get('hint')->getData();
+                $maxErrors = $form->get('maxErrors')->getData();
+
+                $challenge->setWord($word);
+                $challenge->setHint($hint);
+                $challenge->setMaxErrors($maxErrors);
             }
 
             $entityManager->flush();

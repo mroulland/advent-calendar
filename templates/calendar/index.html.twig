@@ -20,6 +20,10 @@
         <p class="results">
         {% if points >= 4 %}
             Félicitations, tu as marqué <span class="points">{{ points }} point{{points > 1 ? 's' : ''}}</span>&nbsp;! 
+
+            {% if attempts is defined %} 
+                <br/>Tu as trouvé le mot en <span class="attempts">{{ attempts }} tentative{{attempts > 1 ? 's' : ''}}</span>.
+            {% endif %}
         {% else %}
             Dommage, tu as marqué <span class="points">{{ points }} point{{points > 1 ? 's' : ''}}</span>. Retente ta chance demain pour un meilleur résultat&nbsp;!
         {% endif %}
@@ -32,6 +36,8 @@
             {{ include('calendar/_photo.html.twig')}}
         {% elseif type == 'participation' %}
             {{ include('calendar/_participation.html.twig')}}
+        {% elseif type == 'hangman' %}
+            {{ include('calendar/_hangman.html.twig')}}
         {% endif %}
 
     {% endif %}

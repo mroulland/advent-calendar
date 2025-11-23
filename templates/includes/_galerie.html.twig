@@ -27,7 +27,7 @@
         <p>Aucune participation pour le moment.</p>
     {% endif %}
 
-    {% if oldRankings is not empty %}
+    {% if oldRankings is defined and oldRankings is not empty %}
     <h2>Participations des années précédentes</h2>
         <div class="elements">
         {% for oldRanking in oldRankings %}

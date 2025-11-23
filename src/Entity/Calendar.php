@@ -24,7 +24,7 @@ class Calendar
     private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'calendars')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?AdventCalendar $adventCalendar = null;
 
 

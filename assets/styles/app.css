@@ -329,6 +329,40 @@ main section.game div#quiz .audio-type-label audio, main section.game div#partic
   display: block;
   margin-top: 1rem;
 }
+main section.game div#hangman {
+  display: none;
+}
+main section.game div.hangman-content #word {
+  text-align: center;
+  margin: 2rem 0 4rem;
+  font-size: 3.5rem;
+}
+main section.game div.hangman-content #letters {
+  text-align: center;
+  margin: 2rem 4rem;
+}
+main section.game div.hangman-content #letters .letter {
+  padding: 8px 12px;
+  margin: 4px;
+  cursor: pointer;
+  border: 1px solid #0b5d31;
+  border-radius: 4px;
+  background: #0b5d31;
+  color: #fff;
+  font-size: 2rem;
+}
+main section.game div.hangman-content #letters .letter.used {
+  background: #bbb;
+  color: #666;
+  cursor: not-allowed;
+}
+main section.game div.hangman-content #errors {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #da1600;
+}
 main section.game form[name=photo] label {
   display: inline-block;
   color: #0b5d31;

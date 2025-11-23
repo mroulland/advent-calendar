@@ -3,9 +3,10 @@
 namespace App\Form\Admin;
 
 use App\Entity\Challenge;
-use App\Entity\ParticipationChallenge;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
+use App\Entity\HangmanChallenge;
+use App\Entity\ParticipationChallenge;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\Form\DataTransformer\JsonArrayTransformer;
@@ -25,6 +26,7 @@ class ChallengeType extends AbstractType
                 'Quiz' => 'quiz',
                 'Photo' => 'photo',
                 'Participation' => 'participation',
+                'Pendu' => 'hangman'
             ],
             'mapped' => false,
             'label' => 'Type de défi'
@@ -58,6 +60,20 @@ class ChallengeType extends AbstractType
                 'required' => false,
                 'label' => 'Dossier où stocker les photos'
             ]);
+        }
+        
+        if ($options['data'] instanceof HangmanChallenge) {
+            $builder
+                ->add('word', TextType::class, [
+                    'label' => 'Mot à deviner'
+                ])
+                ->add('hint', TextType::class, [
+                    'label' => 'Indice (optionnel)',
+                    'required' => false
+                ])
+                ->add('maxErrors', TextType::class, [
+                    'label' => 'Nombre d\'erreurs autorisées'
+                ]);
         }
 
     }

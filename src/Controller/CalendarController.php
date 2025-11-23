@@ -7,9 +7,11 @@ use App\Form\QuizType;
 use App\Entity\Ranking;
 use App\Form\PhotoType;
 use App\Entity\Calendar;
+use App\Form\HangmanType;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
 use App\Form\ParticipationType;
+use App\Entity\HangmanChallenge;
 use App\Entity\ParticipationChallenge;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +22,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-#[Route('/calendar')]
+#[Route('/calendrier')]
 class CalendarController extends AbstractController
 {
     #[IsGranted("ROLE_USER")]
@@ -28,7 +30,7 @@ class CalendarController extends AbstractController
     public function index(?Calendar $calendar, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
 
-        if( !isset($calendar) || !$calendar->getChallenge() || 
+        if(!isset($calendar) || !$calendar->getChallenge() || 
             ($calendar->getDate() > new DateTime('now') && $this->denyAccessUnlessGranted('ROLE_ADMIN'))){
             return $this->redirectToRoute('app_main');
         }
@@ -37,34 +39,51 @@ class CalendarController extends AbstractController
         $challenge = $calendar->getChallenge();
         
         $already_done = $manager->getRepository(Ranking::class)->isUserAlreadyDone($user, $challenge) ? true : false;
-        $points = "";
 
+        $params = [
+            'controller_name' => 'CalendarController',
+            'calendar' => $calendar,
+            'already_done' => $already_done,
+            'type' => null,
+            'form' => null,
+            'rankings' => null,
+            'points' => "",
+        ];
+        
         if($challenge instanceof QuizChallenge)
         {
-            $type = "quiz";
+            $params['type'] = "quiz";
             $questions = $challenge->getQuestions();
 
-            $form = $this->createForm(QuizType::class, null, ['questions' => $questions]);
+            $params['form'] = $this->createForm(QuizType::class, null, ['questions' => $questions]);
         }
         elseif($challenge instanceof PhotoChallenge)
         {
-            $type = "photo";
-            $form = $this->createForm(PhotoType::class);
+            $params['type'] = "photo";
+            $params['form'] = $this->createForm(PhotoType::class);
         }
         elseif($challenge instanceof ParticipationChallenge)
         {
-            $type = "participation";
+            $params['type'] = "participation";
             $questions = $challenge->getQuestions();
-            $form = $this->createForm(ParticipationType::class, null, ['questions' => $questions]);
+            $params['form'] = $this->createForm(ParticipationType::class, null, ['questions' => $questions]);
+        }
+        elseif($challenge instanceof HangmanChallenge)
+        {
+            $params['type'] = "hangman";
+            $params['word'] = $challenge->getWord();
+            $params['hint'] = $challenge->getHint();
+            $params['maxErrors'] = $challenge->getMaxErrors();
+
+            $params['form'] = $this->createForm(HangmanType::class);       
         }else
         {
             return $this->redirectToRoute('app_main');
         }
 
-        $form->handleRequest($request);
+        $params['form']->handleRequest($request);
 
-
-        if (!$already_done && $form->isSubmitted() && $form->isValid()) {
+        if (!$already_done && $params['form']->isSubmitted() && $params['form']->isValid()) {
             
             $ranking = new Ranking();
             $ranking->setDate(new DateTime('now'));
@@ -73,7 +92,7 @@ class CalendarController extends AbstractController
 
             if($challenge instanceof QuizChallenge)
             {
-                $submittedAnswers = $form->getData();
+                $submittedAnswers = $params['form']->getData();
                 $ranking->setDetails($submittedAnswers);
 
                 // Validation des réponses : 
@@ -83,7 +102,7 @@ class CalendarController extends AbstractController
             elseif($challenge instanceof ParticipationChallenge)
             {
                 
-                $submittedAnswers = $form->getData();
+                $submittedAnswers = $params['form']->getData();
                 $ranking->setDetails($submittedAnswers);
 
                 $points = $questions["points"];
@@ -91,7 +110,7 @@ class CalendarController extends AbstractController
             elseif($challenge instanceof PhotoChallenge)
             {
                 
-                $pictureFile = $form->get('pictureFile')->getData();
+                $pictureFile = $params['form']->get('pictureFile')->getData();
                 
                 if($pictureFile){
                     $pictureFilename = $slugger->slug($challenge->getTitle()) . '-'. $ranking->getUser()->getId(). '.'. $pictureFile->guessExtension();
@@ -107,26 +126,32 @@ class CalendarController extends AbstractController
                     }
                 }
             }
+            elseif($challenge instanceof HangmanChallenge)
+            {
+                
+                $submittedAnswers['attempts'] = $params['attempts'] = $params['form']->get('attempts')->getData();
+                $submittedAnswers['word'] = $params['form']->get('word')->getData();
+                $ranking->setDetails($submittedAnswers);
 
+                $points = 5;
+
+                // On veut donner des points bonus à la personne qui a le moins de tentatives
+
+            }
+
+            // Si il s'agit de la première participation au challenge, on ajoute un bonus de 2 points
             if(!$manager->getRepository(Ranking::class)->findByChallenge($challenge)) $points += 2;
             
+            $params['points'] = $points;
             $ranking->setPoints($points);
             $manager->persist($ranking);
             $manager->flush();
         }
 
         // on récupère le ranking global après traitement
-        $rankings = $manager->getRepository(Ranking::class)->findByChallenge($challenge);
+        $params['rankings'] = $manager->getRepository(Ranking::class)->findByChallenge($challenge);
 
-        return $this->render('calendar/index.html.twig', [
-            'controller_name' => 'CalendarController',
-            'calendar' => $calendar,
-            'already_done' => $already_done,
-            'type' => $type,
-            'form' => $form,
-            'rankings' => $rankings,
-            'points' => $points
-        ]);
+        return $this->render('calendar/index.html.twig', $params);
     }
 
     private function validateAnswers($submittedAnswers, $questions)
@@ -154,5 +179,4 @@ class CalendarController extends AbstractController
         }
         return $points;
     }
-
 }
