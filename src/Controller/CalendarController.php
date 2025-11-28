@@ -6,10 +6,12 @@ use DateTime;
 use App\Form\QuizType;
 use App\Entity\Ranking;
 use App\Form\PhotoType;
+use App\Form\WheelType;
 use App\Entity\Calendar;
 use App\Form\HangmanType;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
+use App\Entity\WheelChallenge;
 use App\Form\ParticipationType;
 use App\Entity\HangmanChallenge;
 use App\Entity\ParticipationChallenge;
@@ -31,7 +33,7 @@ class CalendarController extends AbstractController
     {
 
         if(!isset($calendar) || !$calendar->getChallenge() || 
-            ($calendar->getDate() > new DateTime('now') && $this->denyAccessUnlessGranted('ROLE_ADMIN'))){
+            (/*$calendar->getDate() > new DateTime('now') && */$this->denyAccessUnlessGranted('ROLE_ADMIN'))){
             return $this->redirectToRoute('app_main');
         }
 
@@ -76,6 +78,12 @@ class CalendarController extends AbstractController
             $params['maxErrors'] = $challenge->getMaxErrors();
 
             $params['form'] = $this->createForm(HangmanType::class);       
+        } 
+        elseif($challenge instanceof WheelChallenge)
+        {
+            $params['type'] = "wheel";
+            $params['rewards'] = $challenge->getRewards();
+            $params['form'] = $this->createForm(WheelType::class);       
         }else
         {
             return $this->redirectToRoute('app_main');
@@ -137,6 +145,12 @@ class CalendarController extends AbstractController
 
                 // On veut donner des points bonus à la personne qui a le moins de tentatives
 
+            }elseif($challenge instanceof WheelChallenge)
+            {
+                // Le joueur a fait tourner la roue, on lui attribue les points correspondants
+                $points = (int)$submittedAnswers['rewards'] = $params['form']->get('rewards')->getData();
+                $ranking->setDetails($submittedAnswers);
+                $params['wheel_points'] = $points;
             }
 
             // Si il s'agit de la première participation au challenge, on ajoute un bonus de 2 points

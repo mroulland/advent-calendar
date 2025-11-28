@@ -1,0 +1,23 @@
+{% if already_done %}
+    <p class="already-done">Tu as déjà participé à ce défi, rendez-vous au suivant !</p>
+    
+{% else %}
+<h3>🎡 Roulette de Noël</h3>
+{{ form_start(form) }}
+    {{ form_widget(form.rewards) }}
+{{ form_end(form) }}
+
+{{ encore_entry_script_tags('wheel') }}
+
+<div id="wheel-container">
+    <svg id="wheel" width="400" height="400"></svg>
+
+    <button id="spin" class="btn submit">Lancer la roue</button>
+</div>
+
+
+
+<script>
+  window.WHEEL_REWARDS = {{ rewards|json_encode|raw }};
+</script>
+{% endif %}

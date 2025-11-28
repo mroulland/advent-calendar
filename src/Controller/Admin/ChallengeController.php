@@ -5,11 +5,11 @@ namespace App\Controller\Admin;
 use App\Entity\Challenge;
 use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
+use App\Entity\WheelChallenge;
 use App\Entity\HangmanChallenge;
 use App\Entity\ParticipationChallenge;
 use App\Repository\ChallengeRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Egulias\EmailValidator\Parser\PartParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -45,6 +45,8 @@ final class ChallengeController extends AbstractController
                 $challenge = new ParticipationChallenge();
             } elseif ($type === 'hangman') {
                 $challenge = new HangmanChallenge();
+            } elseif ($type === 'wheel') {
+                $challenge = new WheelChallenge();
             }
 
             if ($challenge) {
@@ -95,6 +97,11 @@ final class ChallengeController extends AbstractController
                 $challenge->setWord($word);
                 $challenge->setHint($hint);
                 $challenge->setMaxErrors($maxErrors);
+            }
+
+            if( $challenge instanceof WheelChallenge) {
+                $rewards = $form->get('rewards')->getData();
+                $challenge->setRewards($rewards);
             }
 
             $entityManager->flush();

@@ -457,6 +457,16 @@ main {
       
     }
 
+    div#wheel-container{
+      text-align: center;
+      margin:4rem auto;
+
+      button#spin{
+        display: block;
+        margin: 2rem auto;
+      }
+    }
+
     form[name="photo"] {
 
       label {

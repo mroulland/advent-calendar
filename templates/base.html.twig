@@ -5,10 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Calendrier de l'avent{% endblock %}</title>
         <link rel="icon" href="{{asset('imgs/icons/pere-noel.png')}}" />
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+           
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
+            
         {% endblock %}
     </head>
     <body>
@@ -52,7 +56,7 @@
             {% endfor %}
         {% block body %}{% endblock %}
         </main>      
-        <script src="{{ asset('snowfall.js') }}"></script>
+        
         
     </body>
 </html>

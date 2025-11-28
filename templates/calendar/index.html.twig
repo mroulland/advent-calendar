@@ -18,14 +18,24 @@
     {% if points is not empty %}
         <h3>Résultats</h3>
         <p class="results">
-        {% if points >= 4 %}
+        {% if wheel_points is defined %}
+            {% if wheel_points <= 0 %}
+                🎡 Malheureusement, la roulette n'a pas été très généreuse aujourd'hui et tu as {% if wheel_points > 0 %}gagné que {% elseif wheel_points < 0 %} perdu {% endif %}<span class="wheel_points">{{ wheel_points }} point{{wheel_points > 1 ? 's' : ''}}</span> ...
+            {% else %}
+                🎡 Félicitations, la roulette t'a offert <span class="wheel_points">{{ wheel_points }} point{{wheel_points > 1 ? 's' : ''}}</span> aujourd'hui !
+            {% endif %}
+                   
+        {% else %}
+            {% if points >= 4 %}
             Félicitations, tu as marqué <span class="points">{{ points }} point{{points > 1 ? 's' : ''}}</span>&nbsp;! 
 
-            {% if attempts is defined %} 
-                <br/>Tu as trouvé le mot en <span class="attempts">{{ attempts }} tentative{{attempts > 1 ? 's' : ''}}</span>.
+                {% if attempts is defined %} 
+                    <br/>Tu as trouvé le mot en <span class="attempts">{{ attempts }} tentative{{attempts > 1 ? 's' : ''}}</span>.
+                {% endif %}
+            
+            {% else %}
+                Dommage, tu as marqué <span class="points">{{ points }} point{{points > 1 ? 's' : ''}}</span>. Retente ta chance demain pour un meilleur résultat&nbsp;!   
             {% endif %}
-        {% else %}
-            Dommage, tu as marqué <span class="points">{{ points }} point{{points > 1 ? 's' : ''}}</span>. Retente ta chance demain pour un meilleur résultat&nbsp;!
         {% endif %}
         </p>
     {% else %} 
@@ -38,6 +48,8 @@
             {{ include('calendar/_participation.html.twig')}}
         {% elseif type == 'hangman' %}
             {{ include('calendar/_hangman.html.twig')}}
+        {% elseif type == 'wheel' %}
+            {{ include('calendar/_wheel.html.twig')}}
         {% endif %}
 
     {% endif %}

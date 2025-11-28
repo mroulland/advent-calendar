@@ -363,6 +363,14 @@ main section.game div.hangman-content #errors {
   font-weight: 400;
   color: #da1600;
 }
+main section.game div#wheel-container {
+  text-align: center;
+  margin: 4rem auto;
+}
+main section.game div#wheel-container button#spin {
+  display: block;
+  margin: 2rem auto;
+}
 main section.game form[name=photo] label {
   display: inline-block;
   color: #0b5d31;

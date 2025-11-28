@@ -7,6 +7,7 @@ use App\Entity\QuizChallenge;
 use App\Entity\PhotoChallenge;
 use App\Entity\HangmanChallenge;
 use App\Entity\ParticipationChallenge;
+use App\Entity\WheelChallenge;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\Form\DataTransformer\JsonArrayTransformer;
@@ -26,7 +27,8 @@ class ChallengeType extends AbstractType
                 'Quiz' => 'quiz',
                 'Photo' => 'photo',
                 'Participation' => 'participation',
-                'Pendu' => 'hangman'
+                'Pendu' => 'hangman',
+                'Roulette' => 'wheel'
             ],
             'mapped' => false,
             'label' => 'Type de défi'
@@ -74,6 +76,13 @@ class ChallengeType extends AbstractType
                 ->add('maxErrors', TextType::class, [
                     'label' => 'Nombre d\'erreurs autorisées'
                 ]);
+        }
+        if ($options['data'] instanceof WheelChallenge) {
+            $builder
+                ->add('rewards', TextType::class, [
+                    'label' => 'Récompenses'
+                ])
+            ;
         }
 
     }

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use App\Service\PasswordResetService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -124,10 +126,11 @@ class SecurityController extends AbstractController
                     \Symfony\Component\Routing\Generator\UrlGeneratorInterface::ABSOLUTE_URL
                 );
 
-                $emailMessage = (new \Symfony\Component\Mime\Email())
-                    ->from('no-reply@pixelsandcookies.fr')
+                $emailMessage = (new Email())
+                    ->from('noreply@pixelsandcookies.fr')
                     ->to($user->getEmail())
                     ->subject('Réinitialisation de votre mot de passe')
+                    ->text('Bonjour, ceci est un mail automatique envoyé depuis Symfony !')
                     ->html("
                         <p>Bonjour,</p>
                         <p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p>
@@ -135,7 +138,6 @@ class SecurityController extends AbstractController
                         <p>Ce lien expire dans 1 heure.</p>
                     ");
 
-                    
                 $mailer->send($emailMessage);
             }
 

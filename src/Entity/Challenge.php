@@ -15,7 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
     "quiz" => QuizChallenge::class, 
     "photo" => PhotoChallenge::class, 
     "participation" => ParticipationChallenge::class, 
-    "hangman" => HangmanChallenge::class
+    "hangman" => HangmanChallenge::class,
+    "wheel" => WheelChallenge::class
 ])]
 
 class Challenge
