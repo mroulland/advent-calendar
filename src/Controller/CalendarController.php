@@ -33,7 +33,7 @@ class CalendarController extends AbstractController
     {
 
         if(!isset($calendar) || !$calendar->getChallenge() || 
-            (/*$calendar->getDate() > new DateTime('now') && */$this->denyAccessUnlessGranted('ROLE_ADMIN'))){
+            ($calendar->getDate() > new DateTime('now') && $this->denyAccessUnlessGranted('ROLE_ADMIN'))){
             return $this->redirectToRoute('app_main');
         }
 
@@ -137,13 +137,52 @@ class CalendarController extends AbstractController
             elseif($challenge instanceof HangmanChallenge)
             {
                 
-                $submittedAnswers['attempts'] = $params['attempts'] = $params['form']->get('attempts')->getData();
+                $attempts = $submittedAnswers['attempts'] = $params['attempts'] = $params['form']->get('attempts')->getData();
                 $submittedAnswers['word'] = $params['form']->get('word')->getData();
                 $ranking->setDetails($submittedAnswers);
 
                 $points = 5;
 
-                // On veut donner des points bonus à la personne qui a le moins de tentatives
+                $bestAttempts = null;
+                $bestRankings = []; // liste des anciens meilleurs joueurs
+                
+                $existingRankings = $manager->getRepository(Ranking::class)->findByChallenge($challenge);
+                foreach ($existingRankings as $r) {
+                    $details = $r->getDetails();
+                    if (!isset($details['attempts'])) {
+                        continue;
+                    }
+
+                    $currentAttempts = (int) $details['attempts'];
+
+                    if ($bestAttempts === null || $currentAttempts < $bestAttempts) {
+                        $bestAttempts = $currentAttempts;
+                        $bestRankings = [$r];
+                    } elseif ($currentAttempts === $bestAttempts) {
+                        $bestRankings[] = $r;
+                    }
+                }
+
+                // --------------------------------------
+                // 🎁 Détection : un nouveau record ?
+                // --------------------------------------
+                $newBest = ($bestAttempts === null || $attempts < $bestAttempts);
+
+                if ($newBest) {
+                    // Nouveau meilleur joueur → il gagne +3 points
+                    $points = 8;
+
+                    // Tous les anciens meilleurs repassent à 5 points
+                    foreach ($bestRankings as $oldBest) {
+                        $oldBest->setPoints($oldBest->getPoints() - 3);
+                        $manager->persist($oldBest);
+                        $manager->flush();
+                    }
+
+                } elseif ($bestAttempts !== null && $attempts === $bestAttempts) {
+                    // Même score que les meilleurs → devient aussi "co-meilleur"
+                    $points = 8;
+                }
 
             }elseif($challenge instanceof WheelChallenge)
             {

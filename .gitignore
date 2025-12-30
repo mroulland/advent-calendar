@@ -27,8 +27,8 @@ assets_save
 ###> symfony/asset-mapper ###
 /public/assets/
 /assets/vendor/
-/assets/imgs/challenges
-/assets/imgs/profile_pictures
+/public/imgs/challenges
+/public/imgs/profile_pictures
 ###< symfony/asset-mapper ###
 
 # divers

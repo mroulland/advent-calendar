@@ -83,6 +83,7 @@ class ChallengeType extends AbstractType
                     'label' => 'Récompenses'
                 ])
             ;
+            $builder->get('rewards')->addModelTransformer(new JsonArrayTransformer());
         }
 
     }

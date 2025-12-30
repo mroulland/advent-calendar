@@ -1,4 +1,4 @@
 framework:
     mailer:
-        dsn: '%env(MAILER_DSN)%'
-        message_bus: ~
+        # dsn: 'smtp://calendrier-avent@pixelsandcookies.fr:GNx9xcZ36nVB8%21z@smtp.hostinger.com:587'
+        dsn: 'smtp://calendrier-avent@pixelsandcookies.fr:GNx9xcZ36nVB8%21z@smtp.hostinger.com:465'

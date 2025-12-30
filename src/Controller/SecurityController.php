@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
+use App\Service\EmailService;
 use App\Service\PasswordResetService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -104,7 +105,8 @@ class SecurityController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         PasswordResetService $resetService,
-        \Symfony\Component\Mailer\MailerInterface $mailer
+        \Symfony\Component\Mailer\MailerInterface $mailer,
+        EmailService $emailService
     ): Response {
 
         if ($request->isMethod('POST')) {
@@ -126,22 +128,25 @@ class SecurityController extends AbstractController
                     \Symfony\Component\Routing\Generator\UrlGeneratorInterface::ABSOLUTE_URL
                 );
 
-                $emailMessage = (new Email())
-                    ->from('noreply@pixelsandcookies.fr')
-                    ->to($user->getEmail())
-                    ->subject('Réinitialisation de votre mot de passe')
-                    ->text('Bonjour, ceci est un mail automatique envoyé depuis Symfony !')
-                    ->html("
-                        <p>Bonjour,</p>
-                        <p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p>
-                        <p><a href='$resetUrl'>$resetUrl</a></p>
-                        <p>Ce lien expire dans 1 heure.</p>
-                    ");
 
-                $mailer->send($emailMessage);
+                
+                // $emailMessage = (new Email())
+                //     ->from('calendrier-avent@pixelsandcookies.fr')
+                //     ->to($user->getEmail())
+                //     ->subject('Réinitialisation de votre mot de passe')
+                //     ->text('Bonjour, ceci est un mail automatique envoyé depuis Symfony !')
+                //     ->html("
+                //         <p>Bonjour,</p>
+                //         <p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p>
+                //         <p><a href='$resetUrl'>$resetUrl</a></p>
+                //         <p>Ce lien expire dans 1 heure.</p>
+                //     ");
+
+                // $mailer->send($emailMessage);
             }
 
-            $this->addFlash('success', 'Si un compte existe, un email a été envoyé. <br/> Vérifiez votre boîte de réception ainsi que votre dossier spam.');
+            //$this->addFlash('success', 'Si un compte existe, un email a été envoyé. <br/> Vérifiez votre boîte de réception ainsi que votre dossier spam.');
+            $this->addFlash('success', '<p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p><p><a href='.$resetUrl.'>'.$resetUrl.'</a></p>');
             return $this->redirectToRoute('app_login');
         }
 

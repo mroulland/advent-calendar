@@ -236,7 +236,7 @@ main .login p a {
   display: block;
   margin: 1rem auto;
   padding: 0.5rem;
-  width: 30%;
+  width: 50%;
   background-color: #f1b846;
   color: #fff;
   cursor: pointer;
@@ -295,6 +295,23 @@ main .ranking table td img {
   vertical-align: middle;
   border-radius: 50%;
 }
+main section.rules .pictures {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 8rem;
+}
+main section.rules .pictures figure {
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+main section.rules .pictures img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
 main section.game div#quiz, main section.game div#participation {
   margin-bottom: 2rem;
 }
@@ -334,7 +351,7 @@ main section.game div#hangman {
 }
 main section.game div.hangman-content #word {
   text-align: center;
-  margin: 2rem 0 4rem;
+  margin: 2rem 4rem 4rem;
   font-size: 3.5rem;
 }
 main section.game div.hangman-content #letters {
@@ -356,12 +373,17 @@ main section.game div.hangman-content #letters .letter.used {
   color: #666;
   cursor: not-allowed;
 }
-main section.game div.hangman-content #errors {
+main section.game div.hangman-content #errors, main section.game div.hangman-content #attempts {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2.2rem;
   font-weight: 400;
+}
+main section.game div.hangman-content #errors {
   color: #da1600;
+}
+main section.game div.hangman-content #attempts {
+  color: #0b5d31;
 }
 main section.game div#wheel-container {
   text-align: center;
@@ -565,6 +587,20 @@ footer {
     width: 90%;
     margin: auto;
   }
+  main .login p a {
+    width: 30%;
+  }
+  main section.rules .pictures {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  main section.rules .pictures figure {
+    aspect-ratio: 1/1;
+  }
+  main section.game div.hangman-content #letters {
+    max-width: 500px;
+    margin: 2rem auto;
+    text-align: center;
+  }
   main .ranking table {
     font-size: 1.8rem;
   }
@@ -620,6 +656,12 @@ footer {
   body main .login-form button[type=submit],
   body main .forgot-password-form button[type=submit] {
     max-width: 45rem;
+  }
+  body main section.rules .pictures {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  body main section.rules .pictures figure {
+    aspect-ratio: 1/1;
   }
 }
 @media screen and (min-width: 1440px) {

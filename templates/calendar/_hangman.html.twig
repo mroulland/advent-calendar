@@ -9,7 +9,7 @@
 <div class="hangman-content">
     <div id="word"></div>
     <div id="letters"></div>
-    <div id="errors">Erreurs : 0</div>
+    {# <div id="errors">Erreurs : 0</div> #}
     <div id="attempts">Tentatives : 0</div>
 
     <div id="letters"></div>
@@ -54,10 +54,10 @@
                 btn.disabled = true; // empêche de recliquer
             }
             
-            if (!word.includes(letter)) {
-                errors++;
-                document.getElementById("errors").textContent = "Erreurs : " + errors;
-            }
+            // if (!word.includes(letter)) {
+            //     errors++;
+            //     document.getElementById("errors").textContent = "Erreurs : " + errors;
+            // }
 
             attempts++;
             document.getElementById("attempts").textContent = "Tentatives : " + attempts;
@@ -73,9 +73,9 @@
 
                 document.getElementsByTagName("form")[0].submit();
             }
-            if (errors >= 6) {
-                alert("Perdu ! Le mot était : " + word);
-            }
+            // if (errors >= 6) {
+            //     alert("Perdu ! Le mot était : " + word);
+            // }
         }
 
         displayWord();
